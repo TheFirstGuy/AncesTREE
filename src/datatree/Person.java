@@ -7,6 +7,9 @@ import java.util.Date;
 /**
  * Created by TheFirstGuy on 1/3/2017.
  */
+
+// Stores a person's information and biological relationships
+
 public class Person {
 
     // Relatives
@@ -36,6 +39,17 @@ public class Person {
         this.birthDate = birthDate;
     }
 
+    // Constructor which takes middle names which are separated by spaces
+    public Person(String firstName,
+                  String middleNames,
+                  String lastName,
+                  Date birthDate){
+        this.firstName = firstName;
+        this.middleNames = Person.parseMiddleNames(middleNames);
+        this.lastName = lastName;
+        this.birthDate = birthDate;
+    }
+
     // Parses a string of middle names into an arraylist of names
     public static ArrayList<String> parseMiddleNames(String middleNames){
         // TODO: Add support for multiword names
@@ -58,6 +72,35 @@ public class Person {
         }
     }
 
+    // Test full equality of a person by matching all of their names
+    public static boolean isEqual(Person person1, Person person2){
+        return Person.isEqual(person1.firstName, person1.getMiddleNames(), person1.lastName, person2);
+    }
+
+
+    // Tests full equality of a person by matching all of their names
+    public static boolean isEqual(String firstName, ArrayList<String> middleNames, String lastName, Person person){
+        boolean isEqual = false;
+        isEqual = person.getFirstName() == firstName;
+        isEqual = isEqual && person.getLastName() == lastName;
+        for( int i = 0; isEqual && middleNames.size() == person.getMiddleNames().size() && i < middleNames.size(); i++){
+            isEqual = isEqual && middleNames.get(i) == person.getMiddleNames().get(i);
+        }
+        return isEqual;
+    }
+
+    // Tests partial equality of a person by matching the first and last name
+    public static boolean partialEqual(Person person1, Person person2){
+        return Person.partialEqual(person1.firstName, person1.lastName, person2);
+    }
+
+    // Tests partial equality of a person by matching the first and last name
+    public static boolean partialEqual(String firstName, String lastName, Person person){
+        boolean isEqual = false;
+        isEqual = person.getFirstName() == firstName;
+        isEqual = isEqual && person.getLastName() == lastName;
+        return  isEqual;
+    }
 
 
    // Getters and Setters
