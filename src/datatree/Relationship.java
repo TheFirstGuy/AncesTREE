@@ -14,4 +14,38 @@ public class Relationship {
 
     public Date startDate;
     public Date stopDate;
+
+    // Constructor
+    Relationship(Person partner1, Person partner2, Date startDate, Date stopDate){
+        this.partner1 = partner1;
+        this.partner2 = partner2;
+        this.startDate = startDate;
+        this.stopDate = stopDate;
+    }
+
+    // Checks for equality between two relationships
+    public static boolean isEqual(Relationship relationship1, Relationship relationship2 ){
+        boolean isEqual = false;
+        if( relationship1.partner1 == relationship2.partner1 && relationship1.partner2 == relationship2.partner2){
+            isEqual = true;
+        }
+        else if(relationship1.partner1 == relationship2.partner2 && relationship1.partner2 == relationship2.partner1){
+            isEqual = true;
+        }
+        return isEqual;
+    }
+
+    // Check for equality between two people and a relationship
+    public static boolean isEqual(Person partner1, Person partner2, Relationship relationship){
+        boolean isEqual = false;
+        if(relationship.partner1 == partner1 && relationship.partner2 == partner2){
+            isEqual = true;
+        }
+        else if(relationship.partner2 == partner1 && relationship.partner1 == partner2){
+            isEqual = true;
+        }
+        return isEqual;
+    }
+
+
 }
