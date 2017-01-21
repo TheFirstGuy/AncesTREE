@@ -2,13 +2,13 @@ package gui;
 
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
-import javafx.geometry.Pos;
-import javafx.scene.Group;
+import javafx.scene.Node;
 import javafx.scene.Scene;
-import javafx.scene.layout.BorderPane;
+import javafx.scene.canvas.Canvas;
+import javafx.scene.canvas.GraphicsContext;
+import javafx.scene.control.SplitPane;
 import javafx.scene.layout.VBox;
 import javafx.scene.paint.Color;
-import javafx.scene.shape.Circle;
 import javafx.stage.Stage;
 
 import java.io.IOException;
@@ -40,9 +40,22 @@ public class Main extends Application {
             FXMLLoader loader = new FXMLLoader();
             loader.setLocation(Main.class.getResource("main.fxml"));
             this.rootLayout = (VBox) loader.load();
-            
+
+            // Test geting canvas
+            SplitPane temp =  (SplitPane) rootLayout.lookup("#mainVBox").lookup("#splitPane");
+            Canvas canvas = (Canvas) temp.getItems().get(1).lookup("#baseCanvas");
+
+            // Create Card for canvas
+            Card card = new Card((int)((canvas.getWidth()/2) - Card.FRAME_WIDTH/2), (int)((canvas.getHeight()/2) - Card.FRAME_HEIGHT/2));
+            // Create graphics context
+            GraphicsContext gc = canvas.getGraphicsContext2D();
+            card.drawCard(gc);
+
+
+
             // Show the scene
             Scene scene = new Scene(rootLayout);
+
             primaryStage.setScene(scene);
             primaryStage.show();
         }
