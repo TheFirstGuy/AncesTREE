@@ -17,7 +17,7 @@
 <?import javafx.scene.text.Font?>
 <?import javafx.scene.text.TextFlow?>
 
-<VBox prefHeight="787.0" prefWidth="1335.0" xmlns="http://javafx.com/javafx/8.0.102" xmlns:fx="http://javafx.com/fxml/1">
+<VBox prefHeight="787.0" prefWidth="1335.0" xmlns="http://javafx.com/javafx/8.0.111" xmlns:fx="http://javafx.com/fxml/1">
   <children>
     <MenuBar VBox.vgrow="NEVER">
       <menus>
@@ -84,8 +84,7 @@
             </AnchorPane>
           <AnchorPane id="canvasPane" minHeight="0.0" minWidth="0.0" prefHeight="160.0" prefWidth="100.0">
                <children>
-                  <Canvas height="758.0" layoutY="-2.0" width="1003.0" />
-                  <TextField layoutX="775.0" layoutY="23.0" prefHeight="30.0" prefWidth="208.0" promptText="Search" AnchorPane.rightAnchor="42.0" AnchorPane.topAnchor="23.0">
+                  <TextField layoutX="796.0" layoutY="14.0" prefHeight="30.0" prefWidth="208.0" promptText="Search">
                      <font>
                         <Font name="System Italic" size="13.0" />
                      </font>
@@ -93,6 +92,7 @@
                         <DropShadow offsetX="2.0" offsetY="2.0" />
                      </effect>
                   </TextField>
+                  <Canvas height="758.0" layoutY="1.0" width="1027.0" />
                </children>
             </AnchorPane>
         </items>
