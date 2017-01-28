@@ -22,8 +22,8 @@ public class Card {
     private int y_;
 
 
-    static final double FRAME_WIDTH = 100;
-    static final double FRAME_HEIGHT = 200;
+    static final double FRAME_WIDTH = 150;
+    static final double FRAME_HEIGHT = 175;
     static final Color FRAME_FILL = Color.WHITESMOKE;
     static final Color FRAME_STROKE = Color.BLACK;
     static final int FRAME_ROUNDNESS = 10;
@@ -47,15 +47,18 @@ public class Card {
         //gc.setStroke(FRAME_STROKE);
         //gc.setLineWidth(STROKE_WIDTH);
         gc.fillRoundRect(x_,y_, frame_.getWidth(), frame_.getHeight(), FRAME_ROUNDNESS, FRAME_ROUNDNESS);
-        drawDropShadow(gc, Color.BLACK, 10);
         gc.fillRoundRect(100, 100, frame_.getWidth(), frame_.getHeight(), FRAME_ROUNDNESS, FRAME_ROUNDNESS);
+        drawDropShadow(gc, Color.BLACK, 10);
 
         //gc.strokeRoundRect(x_,y_, frame_.getWidth(), frame_.getHeight(), FRAME_ROUNDNESS, FRAME_ROUNDNESS);
     }
 
     // Draws drop shadow around the card
     private void drawDropShadow(GraphicsContext gc, Color color, int shadowLength){
-        gc.applyEffect(new DropShadow(shadowLength, color));
+        DropShadow dropShadow = new DropShadow(shadowLength, color);
+        dropShadow.setOffsetX(2.0);
+        dropShadow.setOffsetY(2.0);
+        gc.applyEffect(dropShadow);
     }
 
 
