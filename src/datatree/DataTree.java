@@ -20,8 +20,6 @@ public class DataTree {
      */
     private ArrayList<Relationship> relationships = new ArrayList<Relationship>();
 
-    // Finds person in list which fully matches given name
-    // Returns null if no match found
 
     /**
      * This method finds person in list which fully matches given name.
