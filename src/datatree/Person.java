@@ -26,6 +26,9 @@ public class Person {
     // Dates
     private Date birthDate;
     private Date deathDate;
+    private boolean alive_;
+
+
 
     // Description
     private String description;
@@ -33,10 +36,12 @@ public class Person {
     // Basic constructor, other fields must be set with methods
     public Person(String firstName,
                   String lastName,
-                  Date birthDate){
+                  Date birthDate,
+                  boolean alive){
         this.firstName = firstName;
         this.lastName = lastName;
         this.birthDate = birthDate;
+        this.alive_ = alive;
     }
 
     // Constructor which takes middle names which are separated by spaces
@@ -48,6 +53,18 @@ public class Person {
         this.middleNames = Person.parseMiddleNames(middleNames);
         this.lastName = lastName;
         this.birthDate = birthDate;
+    }
+
+    public Person(String firstName,
+                  String lastName,
+                  Date birthDate,
+                  Date deathDate,
+                  boolean alive){
+        this.firstName = firstName;
+        this.lastName = lastName;
+        this.birthDate = birthDate;
+        this.deathDate = deathDate;
+        this.alive_ = alive;
     }
 
     // Parses a string of middle names into an arraylist of names
@@ -177,6 +194,12 @@ public class Person {
         this.description = description;
     }
 
+    public boolean isAlive() {
+        return alive_;
+    }
 
+    public void setAlive(boolean isAlive){
+        alive_ = isAlive;
+    }
 
 }

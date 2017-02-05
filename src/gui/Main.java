@@ -1,5 +1,6 @@
 package gui;
 
+import datatree.Person;
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Node;
@@ -12,6 +13,7 @@ import javafx.scene.paint.Color;
 import javafx.stage.Stage;
 
 import java.io.IOException;
+import java.util.Date;
 
 public class Main extends Application {
 
@@ -45,8 +47,10 @@ public class Main extends Application {
             SplitPane temp =  (SplitPane) rootLayout.lookup("#mainVBox").lookup("#splitPane");
             Canvas canvas = (Canvas) temp.getItems().get(1).lookup("#baseCanvas");
 
+            // Create person for card
+            Person person = new Person("Eddard", "Stark", new Date(-1700, 1, 12), new Date(-1650, 6, 31), false);
             // Create Card for canvas
-            Card card = new Card((int)((canvas.getWidth()/2) - Card.FRAME_WIDTH/2), (int)((canvas.getHeight()/2) - Card.FRAME_HEIGHT/2));
+            Card card = new Card(person);
             // Create graphics context
             GraphicsContext gc = canvas.getGraphicsContext2D();
             card.drawCard(gc);
