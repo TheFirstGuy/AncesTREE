@@ -153,8 +153,39 @@ public class Card {
         gc.applyEffect(dropShadow);
     }
 
+    public Rectangle getFrame(){
+        return frame_;
+    }
 
+    public double getCenterX(){
+        return x_ + frame_.getWidth()/2;
+    }
 
+    public double getCenterY(){
+        return y_ + frame_.getHeight()/2;
+    }
 
+    public double getHalfWidth(){
+        return frame_.getWidth()/2;
+    }
 
+    public double getHalfHeight(){
+        return frame_.getHeight()/2;
+    }
+
+    public int getX() {
+        return x_;
+    }
+
+    public int getY(){
+        return y_;
+    }
+
+    public void setX( int x ){
+        x_ = x;
+    }
+
+    public void setY( int y ){
+        y_ = y;
+    }
 }

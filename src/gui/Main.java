@@ -1,5 +1,6 @@
 package gui;
 
+import datatree.DataTree;
 import datatree.Person;
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
@@ -49,11 +50,14 @@ public class Main extends Application {
 
             // Create person for card
             Person person = new Person("Eddard", "Stark", new Date(-1700, 1, 12), new Date(-1650, 6, 31), false);
-            // Create Card for canvas
-            Card card = new Card(person);
-            // Create graphics context
+
             GraphicsContext gc = canvas.getGraphicsContext2D();
-            card.drawCard(gc);
+
+            DataTree dataTree = new DataTree();
+
+            CardManager cardManager = new CardManager(gc, canvas, dataTree);
+
+            cardManager.initCards(person);
 
 
 

@@ -18,7 +18,7 @@ public class DataTree {
     /**
      * List of relationships between persons
      */
-    private ArrayList<Relationship> relationships = new ArrayList<Relationship>();
+    private ArrayList<Relationship> relationships_ = new ArrayList<Relationship>();
 
 
     /**
@@ -91,9 +91,9 @@ public class DataTree {
         }
         Relationship existingRelationship = null;
         // Check to see if relationship is found
-        for(int i = 0; i < relationships.size() && existingRelationship == null; i++){
-            if(Relationship.isEqual(partner1,partner2, relationships.get(i))){
-                existingRelationship = relationships.get(i);
+        for(int i = 0; i < relationships_.size() && existingRelationship == null; i++){
+            if(Relationship.isEqual(partner1,partner2, relationships_.get(i))){
+                existingRelationship = relationships_.get(i);
             }
         }
         // If an existing relationship exists, modify the start and end date
@@ -104,7 +104,7 @@ public class DataTree {
         // Create a new relationship and add to list
         else{
             Relationship relationship = new Relationship(partner1, partner2, startDate, stopDate);
-            relationships.add(relationship);
+            relationships_.add(relationship);
         }
         return true;
     }

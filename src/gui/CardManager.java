@@ -1,6 +1,7 @@
 package gui;
 
 import datatree.DataTree;
+import datatree.Person;
 import javafx.geometry.Point2D;
 import javafx.scene.canvas.Canvas;
 import javafx.scene.canvas.GraphicsContext;
@@ -52,13 +53,43 @@ public class CardManager {
         graphicsContext_ = graphicsContext;
         canvas_ = canvas;
         dataTree_ = dataTree;
+
     }
 
     /**
      * Initializes the cards using the data tree.
+     * @param firstPerson The person to be centered on when cards are initially drawn
      */
-    private void initCards(){
-
+    public void initCards(Person firstPerson){
+        Card card = new Card(firstPerson);
+        centerCard(card);
+        card.drawCard(graphicsContext_);
     }
 
+    /**
+     * Gets the center x coordinate of the canvas
+     * @return center x coordinate of the canvas
+     */
+    private double getCenterXOfCanvas(){
+        return canvas_.getWidth() / 2;
+    }
+
+    /**
+     * Gets the center y coordinate of the canvas
+     * @return center y coordinate of the canvas
+     */
+    private double getCenterYOfCanvas(){
+        return canvas_.getHeight() / 2;
+    }
+
+    /**
+     * Centers the given card in the center of the canvas
+     * @param card the card to be centered
+     */
+    private void centerCard(Card card){
+        int x = (int)(getCenterXOfCanvas() - card.getHalfWidth());
+        int y = (int)(getCenterYOfCanvas() - card.getHalfHeight());
+        card.setX(x);
+        card.setY(y);
+    }
 }
