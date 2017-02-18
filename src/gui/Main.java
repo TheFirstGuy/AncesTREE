@@ -49,7 +49,7 @@ public class Main extends Application {
             Canvas canvas = (Canvas) temp.getItems().get(1).lookup("#baseCanvas");
 
             // Create person for card
-            Person person = new Person("Eddard", "Stark", new Date(-1700, 1, 12), new Date(-1650, 6, 31), false);
+            Person person = new Person("Eddard", "Stark", Person.SEX.MALE ,new Date(-1700, 1, 12), new Date(-1650, 6, 31), false);
 
             GraphicsContext gc = canvas.getGraphicsContext2D();
 

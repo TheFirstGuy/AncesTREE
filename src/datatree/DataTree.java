@@ -71,8 +71,8 @@ public class DataTree {
      * @param lastName The person's last name
      * @param birthdate The person's date of birth
      */
-    public void addPerson(String firstName, String lastName, Date birthdate, boolean alive){
-        Person person = new Person(firstName, lastName, birthdate, alive);
+    public void addPerson(String firstName, String lastName, Date birthdate, Person.SEX sex, boolean alive){
+        Person person = new Person(firstName, lastName,  birthdate, sex, alive);
         family_.add(person);
     }
 
