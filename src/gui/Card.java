@@ -132,7 +132,6 @@ public class Card {
         //gc.setStroke(FRAME_STROKE);
         //gc.setLineWidth(STROKE_WIDTH);
         gc.fillRoundRect(x_,y_, frame_.getWidth(), frame_.getHeight(), FRAME_ROUNDNESS, FRAME_ROUNDNESS);
-        drawDropShadow(gc, Color.BLACK, 10);
         gc.strokeOval( x_+ (frame_.getWidth()/2) - PIC_DIAMETER/2, y_+ PADDING, PIC_DIAMETER, PIC_DIAMETER);
         gc.setFont(FONT);
         gc.setFill(Color.BLACK);
@@ -145,13 +144,7 @@ public class Card {
         gc.strokeRoundRect(x_,y_, frame_.getWidth(), frame_.getHeight(), FRAME_ROUNDNESS, FRAME_ROUNDNESS);
     }
 
-    // Draws drop shadow around the card
-    private void drawDropShadow(GraphicsContext gc, Color color, int shadowLength){
-        DropShadow dropShadow = new DropShadow(shadowLength, color);
-        dropShadow.setOffsetX(2.0);
-        dropShadow.setOffsetY(2.0);
-        gc.applyEffect(dropShadow);
-    }
+
 
     public Rectangle getFrame(){
         return frame_;

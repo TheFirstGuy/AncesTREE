@@ -8,14 +8,17 @@ import java.util.Date;
  * Created by TheFirstGuy on 1/3/2017.
  */
 
-// Stores a person's information and biological relationships
+// Stores a person's information and biological relationship
 
 public class Person {
+
+    public enum SEX { MALE, FEMALE }
 
     // Relatives
     private Person father;
     private Person mother;
     private ArrayList<Person> children;
+    private SEX sex_;
 
 
     // Names of person
@@ -37,10 +40,12 @@ public class Person {
     public Person(String firstName,
                   String lastName,
                   Date birthDate,
+                  SEX sex,
                   boolean alive){
         this.firstName = firstName;
         this.lastName = lastName;
         this.birthDate = birthDate;
+        this.sex_ = sex;
         this.alive_ = alive;
     }
 
@@ -48,20 +53,24 @@ public class Person {
     public Person(String firstName,
                   String middleNames,
                   String lastName,
+                  SEX sex,
                   Date birthDate){
         this.firstName = firstName;
         this.middleNames = Person.parseMiddleNames(middleNames);
         this.lastName = lastName;
+        this.sex_ = sex;
         this.birthDate = birthDate;
     }
 
     public Person(String firstName,
                   String lastName,
+                  SEX sex,
                   Date birthDate,
                   Date deathDate,
                   boolean alive){
         this.firstName = firstName;
         this.lastName = lastName;
+        this.sex_ = sex;
         this.birthDate = birthDate;
         this.deathDate = deathDate;
         this.alive_ = alive;
@@ -96,7 +105,10 @@ public class Person {
 
 
     // Tests full equality of a person by matching all of their names
-    public static boolean isEqual(String firstName, ArrayList<String> middleNames, String lastName, Person person){
+    public static boolean isEqual(String firstName,
+                                  ArrayList<String> middleNames,
+                                  String lastName,
+                                  Person person){
         boolean isEqual = false;
         isEqual = person.getFirstName() == firstName;
         isEqual = isEqual && person.getLastName() == lastName;
@@ -128,6 +140,10 @@ public class Person {
 
     public void setFather(Person father) {
         this.father = father;
+        // Check that not already set as child
+        if( !father.children.contains(this) ){
+            father.children.add(this);
+        }
     }
 
     public Person getMother() {
@@ -136,6 +152,10 @@ public class Person {
 
     public void setMother(Person mother) {
         this.mother = mother;
+        // Check that not already set as child
+        if( !mother.children.contains(this) ) {
+            mother.children.add(this);
+        }
     }
 
     public ArrayList<Person> getChildren() {
@@ -143,7 +163,17 @@ public class Person {
     }
 
     public void addChild(Person child) {
-        children.add(child);
+        // Check that child is not already set
+        if(!children.contains(child)){
+            children.add(child);
+        }
+        // Set at parent
+        if(sex_ == SEX.MALE){
+            child.father = this;
+        }
+        else if(sex_ == SEX.FEMALE){
+            child.mother = this;
+        }
     }
 
     public String getFirstName() {

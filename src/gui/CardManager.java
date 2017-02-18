@@ -5,10 +5,15 @@ import datatree.Person;
 import javafx.geometry.Point2D;
 import javafx.scene.canvas.Canvas;
 import javafx.scene.canvas.GraphicsContext;
+import javafx.scene.effect.DropShadow;
 import javafx.scene.effect.Light;
+import javafx.scene.paint.Color;
 import javafx.scene.shape.Rectangle;
+import sun.misc.Queue;
 
 import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.HashSet;
 
 /**
  * Created by Urs on 1/28/2017.
@@ -30,7 +35,7 @@ public class CardManager {
     /**
      *  The cards formed.
      */
-    private ArrayList<Card> cards_;
+    private HashMap<Person, Card> cards_;
 
     /**
      *  The zone which cards are drawn, any cards whos coordinates
@@ -42,6 +47,9 @@ public class CardManager {
      *  The data tree which ancestry tree data is stored
      */
     private DataTree dataTree_;
+
+    private final static int X_PADDING = 50;
+    private final static int Y_PADDING = 50;
 
     /**
      *  CardManager constructor.
@@ -64,6 +72,7 @@ public class CardManager {
         Card card = new Card(firstPerson);
         centerCard(card);
         card.drawCard(graphicsContext_);
+        drawDropShadow(graphicsContext_, Color.BLACK, 12);
     }
 
     /**
@@ -91,5 +100,34 @@ public class CardManager {
         int y = (int)(getCenterYOfCanvas() - card.getHalfHeight());
         card.setX(x);
         card.setY(y);
+    }
+
+    // Draws drop shadow around the card
+    private void drawDropShadow(GraphicsContext gc, Color color, int shadowLength){
+        DropShadow dropShadow = new DropShadow(shadowLength, color);
+        dropShadow.setOffsetX(2.0);
+        dropShadow.setOffsetY(2.0);
+        gc.applyEffect(dropShadow);
+    }
+
+    /**
+     * Crawls through the ancestry graph to determine which cards can/need to be drawn.
+     * Uses a form of breadth first search.
+     * @param firstPerson Person to begin search from
+     */
+    private void crawlTree(Person firstPerson){
+        Card card;
+        HashSet<Person> explored = new HashSet<Person>();
+        Queue<Person> fringe = new Queue<Person>();
+        Person currentPerson = firstPerson;
+        // Check if first person has been initialized
+        if(!cards_.containsKey(firstPerson)){
+            card = new Card(firstPerson);
+            centerCard(card);
+        }
+        // Explore graph
+        // Get parents
+        Person father = currentPerson.getFather();
+        Person mother = currentPerson.getMother();
     }
 }
