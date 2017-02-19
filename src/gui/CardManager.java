@@ -11,6 +11,7 @@ import javafx.scene.paint.Color;
 import javafx.scene.shape.Rectangle;
 import sun.misc.Queue;
 
+import java.lang.reflect.Array;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.HashSet;
@@ -35,7 +36,7 @@ public class CardManager {
     /**
      *  The cards formed.
      */
-    private HashMap<Person, Card> cards_;
+    private HashMap<Person, Card> cards_ = new HashMap<Person, Card>();
 
     /**
      *  The zone which cards are drawn, any cards whos coordinates
@@ -71,7 +72,14 @@ public class CardManager {
     public void initCards(Person firstPerson){
         Card card = new Card(firstPerson);
         centerCard(card);
-        card.drawCard(graphicsContext_);
+        // Add to card list
+        cards_.put(firstPerson, card);
+        positionOtherParent(card);
+        // draw all cards
+        for(Card c: cards_.values()){
+            c.drawCard(graphicsContext_);
+        }
+        //card.drawCard(graphicsContext_);
         drawDropShadow(graphicsContext_, Color.BLACK, 12);
     }
 
@@ -129,5 +137,66 @@ public class CardManager {
         // Get parents
         Person father = currentPerson.getFather();
         Person mother = currentPerson.getMother();
+
+    }
+
+    /**
+     * Gets Siblings and positions them
+     */
+
+    /**
+     * Positions other parent.
+     * @param cardOfInterest Person who is one of the parents
+     */
+    private void positionOtherParent(Card cardOfInterest){
+        HashSet<Person> partners = dataTree_.getPartners(cardOfInterest.getPerson());
+        Card newCard;
+        Card referenceCard = cardOfInterest;
+        boolean positionRight = true;
+        if(partners != null) {
+            for (Person partner : partners) {
+                // Try to create new card
+                if (!cards_.containsKey(partner)) {
+                    newCard = new Card(partner);
+                    cards_.put(partner, newCard);
+                    if (positionRight) {
+                        positionRightOf(referenceCard, newCard);
+                        positionRight = false;
+                    } else {
+                        positionLeftOf(referenceCard, newCard);
+                    }
+                }
+            }
+        }
+    }
+    /**
+     * Gets children and positions them in the tree.
+     * @param firstPerson Person whos children are to be drawn
+     */
+    private void positionChildren(Person firstPerson){
+        
+    }
+
+    /**
+     * Positions the target card to the right of the origin card
+     * @param origin the reference card
+     * @param target the card to be put to the right of the origin
+     */
+    private void positionRightOf(Card origin, Card target){
+        // Set up coordinates
+        target.setY(origin.getY());
+        int x = (int)(origin.getX() + (2*origin.getHalfWidth()) + X_PADDING);
+        target.setX(x);
+    }
+
+    /**
+     * Positions the target card to the left of the origin card
+     * @param origin the reference card
+     * @param target the card to be put to the right of the origin
+     */
+    private void positionLeftOf(Card origin, Card target){
+        target.setY(origin.getY());
+        int x = (int)(origin.getX() - (2*target.getHalfWidth()) - X_PADDING);
+        target.setX(x);
     }
 }

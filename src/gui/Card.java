@@ -181,4 +181,8 @@ public class Card {
     public void setY( int y ){
         y_ = y;
     }
+
+    public Person getPerson(){
+        return person_;
+    }
 }

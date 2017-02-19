@@ -17,13 +17,13 @@ public class Person {
     // Relatives
     private Person father;
     private Person mother;
-    private ArrayList<Person> children;
+    private ArrayList<Person> children = new ArrayList<Person>();
     private SEX sex_;
 
 
     // Names of person
     private String firstName;
-    private ArrayList<String> middleNames;
+    private ArrayList<String> middleNames = new ArrayList<String>();
     private String lastName;
 
     // Dates
@@ -54,12 +54,14 @@ public class Person {
                   String middleNames,
                   String lastName,
                   SEX sex,
-                  Date birthDate){
+                  Date birthDate,
+                  boolean alive){
         this.firstName = firstName;
         this.middleNames = Person.parseMiddleNames(middleNames);
         this.lastName = lastName;
         this.sex_ = sex;
         this.birthDate = birthDate;
+        this.alive_ = alive;
     }
 
     public Person(String firstName,
@@ -75,6 +77,9 @@ public class Person {
         this.deathDate = deathDate;
         this.alive_ = alive;
     }
+
+
+
 
     // Parses a string of middle names into an arraylist of names
     public static ArrayList<String> parseMiddleNames(String middleNames){
@@ -139,6 +144,10 @@ public class Person {
     }
 
     public void setFather(Person father) {
+        // Remove from the father's list of children if one existed
+        if(this.father != null){
+            this.father.removeChild(this);
+        }
         this.father = father;
         // Check that not already set as child
         if( !father.children.contains(this) ){
@@ -151,6 +160,10 @@ public class Person {
     }
 
     public void setMother(Person mother) {
+        // Remove from mother's list of children if one existed
+        if(this.mother != null){
+            this.mother.removeChild(this);
+        }
         this.mother = mother;
         // Check that not already set as child
         if( !mother.children.contains(this) ) {
@@ -174,6 +187,10 @@ public class Person {
         else if(sex_ == SEX.FEMALE){
             child.mother = this;
         }
+    }
+
+    public void removeChild(Person child){
+        children.remove(child);
     }
 
     public String getFirstName() {
@@ -230,6 +247,10 @@ public class Person {
 
     public void setAlive(boolean isAlive){
         alive_ = isAlive;
+    }
+
+    public Person.SEX getSex_(){
+        return sex_;
     }
 
 }

@@ -3,6 +3,7 @@ package datatree;
 
 import java.util.ArrayList;
 import java.util.Date;
+import java.util.HashSet;
 
 /**
  * Created by TheFirstGuy on 1/3/2017.
@@ -107,6 +108,44 @@ public class DataTree {
             relationships_.add(relationship);
         }
         return true;
+    }
+
+    /**
+     * Gets all of a persons siblings
+     * @param person Person of interest.
+     * @return Set of persons who are silbings
+     */
+    public HashSet<Person> getSiblings(Person person){
+        HashSet<Person> siblings = new HashSet<Person>();
+        // Get siblings on the father's side
+        if(person.getFather() != null){
+            siblings.addAll(person.getFather().getChildren());
+        }
+        // Get siblings on the mothers side
+        if(person.getMother() != null){
+            siblings.addAll(person.getMother().getChildren());
+        }
+        return siblings;
+    }
+
+    /**
+     * Gets a set of persons which the person of interest has had children with
+     * @param person
+     * @return Set of persons which the person of interest has had children with
+     */
+    public HashSet<Person> getPartners(Person person){
+
+        HashSet<Person> partners = new HashSet<Person>();
+        ArrayList<Person> children = person.getChildren();
+        for(Person child : children){
+            if(person.getSex_() == Person.SEX.MALE){
+                partners.add(child.getMother());
+            }
+            else if(person.getSex_() == Person.SEX.FEMALE){
+                partners.add(child.getFather());
+            }
+        }
+        return partners;
     }
 
 

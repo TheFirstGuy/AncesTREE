@@ -49,7 +49,23 @@ public class Main extends Application {
             Canvas canvas = (Canvas) temp.getItems().get(1).lookup("#baseCanvas");
 
             // Create person for card
-            Person person = new Person("Eddard", "Stark", Person.SEX.MALE ,new Date(-1700, 1, 12), new Date(-1650, 6, 31), false);
+            Person eddard = new Person("Eddard", "Stark", Person.SEX.MALE ,new Date(-1637, 1, 12), new Date(-1601, 6, 31), false);
+            Person catelyn = new Person("Catelyn", "Tully", Person.SEX.FEMALE, new Date(-1636, 4, 24), new Date(-1601, 8, 23), false);
+            Person robb = new Person("Robb", "Stark", Person.SEX.MALE, new Date(-1617, 2, 10), new Date(-1601, 3, 10), false);
+            Person sansa = new Person("Sansa", "Stark", Person.SEX.FEMALE, new Date(-1614, 3, 12), null, true);
+            Person arya = new Person("Arya", "Stark", Person.SEX.FEMALE, new Date(-1611, 3, 12), null, true);
+            Person bran = new Person("Bran", "Stark", Person.SEX.MALE, new Date(-1610, 5, 2), null, true);
+            Person rickon = new Person("Rickon", "Stark", Person.SEX.MALE, new Date(-1605, 7, 23), null, true);
+            robb.setFather(eddard);
+            sansa.setFather(eddard);
+            arya.setFather(eddard);
+            bran.setFather(eddard);
+            rickon.setFather(eddard);
+            robb.setMother(catelyn);
+            sansa.setMother(catelyn);
+            arya.setMother(catelyn);
+            bran.setMother(catelyn);
+            rickon.setMother(catelyn);
 
             GraphicsContext gc = canvas.getGraphicsContext2D();
 
@@ -57,7 +73,7 @@ public class Main extends Application {
 
             CardManager cardManager = new CardManager(gc, canvas, dataTree);
 
-            cardManager.initCards(person);
+            cardManager.initCards(eddard);
 
 
 
