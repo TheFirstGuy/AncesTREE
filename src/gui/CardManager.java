@@ -153,12 +153,15 @@ public class CardManager {
         Card newCard;
         Card referenceCard = cardOfInterest;
         boolean positionRight = true;
+
         if(partners != null) {
             for (Person partner : partners) {
                 // Try to create new card
                 if (!cards_.containsKey(partner)) {
                     newCard = new Card(partner);
                     cards_.put(partner, newCard);
+                    // Position new card to the right or left
+                    // TODO: allow for more than two partners
                     if (positionRight) {
                         positionRightOf(referenceCard, newCard);
                         positionRight = false;
@@ -169,12 +172,18 @@ public class CardManager {
             }
         }
     }
+
     /**
      * Gets children and positions them in the tree.
      * @param firstPerson Person whos children are to be drawn
      */
     private void positionChildren(Person firstPerson){
-        
+        ArrayList<Person> children = firstPerson.getChildren();
+        ArrayList<Person> toPosition = new ArrayList<Person>();
+        for(Person child : children){
+
+
+        }
     }
 
     /**

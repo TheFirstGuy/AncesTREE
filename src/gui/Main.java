@@ -3,12 +3,14 @@ package gui;
 import datatree.DataTree;
 import datatree.Person;
 import javafx.application.Application;
+import javafx.beans.property.DoubleProperty;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Node;
 import javafx.scene.Scene;
 import javafx.scene.canvas.Canvas;
 import javafx.scene.canvas.GraphicsContext;
 import javafx.scene.control.SplitPane;
+import javafx.scene.control.TextField;
 import javafx.scene.layout.VBox;
 import javafx.scene.paint.Color;
 import javafx.stage.Stage;
@@ -47,6 +49,12 @@ public class Main extends Application {
             // Test geting canvas
             SplitPane temp =  (SplitPane) rootLayout.lookup("#mainVBox").lookup("#splitPane");
             Canvas canvas = (Canvas) temp.getItems().get(1).lookup("#baseCanvas");
+            TextField textField = (TextField) temp.getItems().get(1).lookup("#searchBox");
+            System.out.println(textField.getLayoutX());
+            //DoubleProperty startX = (DoubleProperty) temp.widthProperty();
+            //startX.bind(textField.layoutXProperty());
+            //textField.layoutXProperty().unbind();
+            //textField.layoutXProperty().bind(temp.widthProperty().subtract(textField.getWidth() + 30));
 
             // Create person for card
             Person eddard = new Person("Eddard", "Stark", Person.SEX.MALE ,new Date(-1637, 1, 12), new Date(-1601, 6, 31), false);
