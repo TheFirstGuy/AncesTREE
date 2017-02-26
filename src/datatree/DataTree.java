@@ -1,9 +1,7 @@
 package datatree;
 
 
-import java.util.ArrayList;
-import java.util.Date;
-import java.util.HashSet;
+import java.util.*;
 
 /**
  * Created by TheFirstGuy on 1/3/2017.
@@ -13,7 +11,7 @@ public class DataTree {
     /**
      * List containing all persons
      */
-    private ArrayList<Person> family_ = new ArrayList<Person>();
+    private HashSet<Person> family_ = new HashSet<Person>();
 
     //
     /**
@@ -31,9 +29,10 @@ public class DataTree {
      */
     public Person find(String firstName, ArrayList<String> middleNames, String lastNames){
         Person match = null;
-        for(int i = 0; i < family_.size() && match == null ; i++){
-            if(Person.isEqual(firstName, middleNames, lastNames, family_.get(i))) {
-                match = family_.get(i);
+        for(Person person : family_){
+            if(Person.isEqual(firstName, middleNames, lastNames, person)) {
+                match = person;
+                break;
             }
         }
         return match;
@@ -47,9 +46,10 @@ public class DataTree {
      */
     public ArrayList<Person> find(String firstName, String lastName){
         ArrayList<Person> people = new ArrayList<Person>();
-        for(int i = 0; i < family_.size(); i++){
-            if(Person.partialEqual(firstName, lastName, family_.get(i))){
-                people.add(family_.get(i));
+        for(Person person : family_){
+            if(Person.partialEqual(firstName, lastName, person)){
+                people.add(person);
+                break;
             }
         }
         return people;

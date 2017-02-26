@@ -51,10 +51,6 @@ public class Main extends Application {
             Canvas canvas = (Canvas) temp.getItems().get(1).lookup("#baseCanvas");
             TextField textField = (TextField) temp.getItems().get(1).lookup("#searchBox");
             System.out.println(textField.getLayoutX());
-            //DoubleProperty startX = (DoubleProperty) temp.widthProperty();
-            //startX.bind(textField.layoutXProperty());
-            //textField.layoutXProperty().unbind();
-            //textField.layoutXProperty().bind(temp.widthProperty().subtract(textField.getWidth() + 30));
 
             // Create person for card
             Person eddard = new Person("Eddard", "Stark", Person.SEX.MALE ,new Date(-1637, 1, 12), new Date(-1601, 6, 31), false);
