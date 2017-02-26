@@ -4,8 +4,9 @@ package gui;
 import com.sun.javafx.tk.FontLoader;
 import com.sun.javafx.tk.Toolkit;
 import datatree.Person;
+import javafx.scene.Node;
 import javafx.scene.canvas.GraphicsContext;
-import javafx.scene.effect.DropShadow;
+import javafx.scene.layout.Pane;
 import javafx.scene.paint.Color;
 import javafx.scene.shape.Rectangle;
 import javafx.scene.text.Font;
@@ -20,7 +21,7 @@ import java.util.Date;
  */
 
 // Card represents a graphical person in the ancesTree
-public class Card {
+public class Card extends Pane {
 
     private Rectangle frame_;
     private int x_;
@@ -31,6 +32,8 @@ public class Card {
     private Rectangle lastNameFrame_;
     private Rectangle lifeSpanFrame_;
     private String lifeSpan_;
+
+    private Node view_;
 
     static final int PADDING = 5;
     static final double FRAME_WIDTH = 150;
@@ -61,6 +64,10 @@ public class Card {
     }
 
 
+
+    /**
+     * Creates the life span string
+     */
     private void initLifeSpanStr(){
         SimpleDateFormat simpleDateFormat = new SimpleDateFormat(DATE_FORMAT);
         // Check if birthdate is known
@@ -145,6 +152,17 @@ public class Card {
     }
 
 
+    /**
+     * Sets the view Node
+     * @param view
+     */
+    public void setView(Node view){
+        view_ = view;
+    }
+
+    public Node getView(){
+        return view_;
+    }
 
     public Rectangle getFrame(){
         return frame_;
