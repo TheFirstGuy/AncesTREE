@@ -2,16 +2,10 @@ package gui;
 
 import datatree.DataTree;
 import datatree.Person;
-import javafx.geometry.Point2D;
-import javafx.scene.canvas.Canvas;
 import javafx.scene.canvas.GraphicsContext;
 import javafx.scene.effect.DropShadow;
-import javafx.scene.effect.Light;
 import javafx.scene.paint.Color;
 import javafx.scene.shape.Rectangle;
-import sun.misc.Queue;
-
-import java.lang.reflect.Array;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.HashSet;
@@ -31,7 +25,7 @@ public class CardManager {
     /**
      *  The Canvas of the ancestry tree
      */
-    private Canvas canvas_;
+    private ZoomableScrollPane scrollPane_;
 
     /**
      *  The cards formed.
@@ -55,12 +49,12 @@ public class CardManager {
     /**
      *  CardManager constructor.
      *  @param graphicsContext The graphical context of the ancestry canvas
-     *  @param canvas The canvas of the ancestry tree
+     *  @param scrollPane The pane which the cards are drawn
      *  @param dataTree The data tree which ancestry tree data is stored
      */
-    public CardManager(GraphicsContext graphicsContext, Canvas canvas, DataTree dataTree){
+    public CardManager(GraphicsContext graphicsContext, ZoomableScrollPane scrollPane, DataTree dataTree){
         graphicsContext_ = graphicsContext;
-        canvas_ = canvas;
+        scrollPane_ = scrollPane;
         dataTree_ = dataTree;
 
     }
@@ -69,46 +63,46 @@ public class CardManager {
      * Initializes the cards using the data tree.
      * @param firstPerson The person to be centered on when cards are initially drawn
      */
-    public void initCards(Person firstPerson){
-        Card card = new Card(firstPerson);
-        centerCard(card);
-        // Add to card list
-        cards_.put(firstPerson, card);
-        positionOtherParent(card);
-        // draw all cards
-        for(Card c: cards_.values()){
-            c.drawCard(graphicsContext_);
-        }
-        //card.drawCard(graphicsContext_);
-        drawDropShadow(graphicsContext_, Color.BLACK, 12);
-    }
+//    public void initCards(Person firstPerson){
+//        Card card = new Card(firstPerson);
+//        centerCard(card);
+//        // Add to card list
+//        cards_.put(firstPerson, card);
+//        positionOtherParent(card);
+//        // draw all cards
+//        for(Card c: cards_.values()){
+//            c.drawCard(graphicsContext_);
+//        }
+//        //card.drawCard(graphicsContext_);
+//        drawDropShadow(graphicsContext_, Color.BLACK, 12);
+//    }
 
     /**
      * Gets the center x coordinate of the canvas
      * @return center x coordinate of the canvas
      */
-    private double getCenterXOfCanvas(){
-        return canvas_.getWidth() / 2;
-    }
+//    private double getCenterXOfCanvas(){
+//        return canvas_.getWidth() / 2;
+//    }
 
     /**
      * Gets the center y coordinate of the canvas
      * @return center y coordinate of the canvas
      */
-    private double getCenterYOfCanvas(){
-        return canvas_.getHeight() / 2;
-    }
+//    private double getCenterYOfCanvas(){
+//        return canvas_.getHeight() / 2;
+//    }
 
     /**
      * Centers the given card in the center of the canvas
      * @param card the card to be centered
      */
-    private void centerCard(Card card){
-        int x = (int)(getCenterXOfCanvas() - card.getHalfWidth());
-        int y = (int)(getCenterYOfCanvas() - card.getHalfHeight());
-        card.setX(x);
-        card.setY(y);
-    }
+//    private void centerCard(Card card){
+//        int x = (int)(getCenterXOfCanvas() - card.getHalfWidth());
+//        int y = (int)(getCenterYOfCanvas() - card.getHalfHeight());
+//        card.setX(x);
+//        card.setY(y);
+//    }
 
     // Draws drop shadow around the card
     private void drawDropShadow(GraphicsContext gc, Color color, int shadowLength){
@@ -123,22 +117,22 @@ public class CardManager {
      * Uses a form of breadth first search.
      * @param firstPerson Person to begin search from
      */
-    private void crawlTree(Person firstPerson){
-        Card card;
-        HashSet<Person> explored = new HashSet<Person>();
-        Queue<Person> fringe = new Queue<Person>();
-        Person currentPerson = firstPerson;
-        // Check if first person has been initialized
-        if(!cards_.containsKey(firstPerson)){
-            card = new Card(firstPerson);
-            centerCard(card);
-        }
-        // Explore graph
-        // Get parents
-        Person father = currentPerson.getFather();
-        Person mother = currentPerson.getMother();
-
-    }
+//    private void crawlTree(Person firstPerson){
+//        Card card;
+//        HashSet<Person> explored = new HashSet<Person>();
+//        Queue<Person> fringe = new Queue<Person>();
+//        Person currentPerson = firstPerson;
+//        // Check if first person has been initialized
+//        if(!cards_.containsKey(firstPerson)){
+//            card = new Card(firstPerson);
+//            centerCard(card);
+//        }
+//        // Explore graph
+//        // Get parents
+//        Person father = currentPerson.getFather();
+//        Person mother = currentPerson.getMother();
+//
+//    }
 
     /**
      * Gets Siblings and positions them

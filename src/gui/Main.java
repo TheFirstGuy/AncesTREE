@@ -75,9 +75,9 @@ public class Main extends Application {
 
             DataTree dataTree = new DataTree();
 
-            CardManager cardManager = new CardManager(gc, canvas, dataTree);
-
-            cardManager.initCards(eddard);
+//            CardManager cardManager = new CardManager(gc, canvas, dataTree);
+//
+//            cardManager.initCards(eddard);
 
 
 

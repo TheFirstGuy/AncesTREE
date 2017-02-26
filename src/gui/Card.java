@@ -61,6 +61,11 @@ public class Card extends Pane {
         this.lifeSpan_ = "";
         initLifeSpanStr();
         calcFrameSize();
+
+        frame_.setStroke(FRAME_STROKE);
+        frame_.setFill(FRAME_FILL);
+
+        setView(frame_);
     }
 
 
