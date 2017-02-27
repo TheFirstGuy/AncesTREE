@@ -1,17 +1,24 @@
 package gui;
 
 import javafx.event.EventHandler;
+import javafx.fxml.FXML;
+import javafx.fxml.FXMLLoader;
 import javafx.scene.Group;
 import javafx.scene.Node;
 import javafx.scene.control.ScrollPane;
 import javafx.scene.input.ScrollEvent;
 import javafx.scene.transform.Scale;
 
+import java.io.IOException;
+
 /**
  * Created by Urs on 2/25/2017.
  * Modifed from Roland http://stackoverflow.com/questions/30679025/graph-visualisation-like-yfiles-in-javafx
  */
 public class ZoomableScrollPane extends ScrollPane {
+
+    @FXML private ScrollPane scrollPane;
+
     private Group zoomGroup_;
     private Scale scaleTransform_;
     private Node content_;
@@ -22,12 +29,23 @@ public class ZoomableScrollPane extends ScrollPane {
      * Contructor
      * @param content Node to be added the Pane?
      */
-    public ZoomableScrollPane(Node content){
-        content_ = content;
+    public ZoomableScrollPane(){
+        //Set up FXML
+        FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("Zoomable_Scroll_Pane.fxml"));
+        fxmlLoader.setRoot(this);
+        fxmlLoader.setController(this);
+
+        try{
+            fxmlLoader.load();
+        }catch (IOException exception){
+            throw new RuntimeException(exception);
+        }
+
+        //content_ = content;
         Group contentGroup = new Group();
         zoomGroup_ = new Group();
         contentGroup.getChildren().add(zoomGroup_);
-        zoomGroup_.getChildren().add(content_);
+        //zoomGroup_.getChildren().add(content_);
         setContent(contentGroup);
         scaleTransform_ = new Scale(scaleValue_, scaleValue_, 0, 0);
         zoomGroup_.getTransforms().add(scaleTransform_);

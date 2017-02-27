@@ -48,9 +48,9 @@ public class Main extends Application {
 
             // Test geting canvas
             SplitPane temp =  (SplitPane) rootLayout.lookup("#mainVBox").lookup("#splitPane");
-            Canvas canvas = (Canvas) temp.getItems().get(1).lookup("#baseCanvas");
-            TextField textField = (TextField) temp.getItems().get(1).lookup("#searchBox");
-            System.out.println(textField.getLayoutX());
+            ZoomableScrollPane zoomableScrollPane = (ZoomableScrollPane) temp.getItems().get(1).lookup("#zoomPane");
+            //TextField textField = (TextField) temp.getItems().get(1).lookup("#searchBox");
+            System.out.println(zoomableScrollPane.getWidth());
 
             // Create person for card
             Person eddard = new Person("Eddard", "Stark", Person.SEX.MALE ,new Date(-1637, 1, 12), new Date(-1601, 6, 31), false);
@@ -71,7 +71,7 @@ public class Main extends Application {
             bran.setMother(catelyn);
             rickon.setMother(catelyn);
 
-            GraphicsContext gc = canvas.getGraphicsContext2D();
+            //GraphicsContext gc = canvas.getGraphicsContext2D();
 
             DataTree dataTree = new DataTree();
 
