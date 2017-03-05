@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.layout.Pane?>
+<?import javafx.scene.shape.Ellipse?>
+
+
+<Pane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="265.0" prefWidth="205.0" style="-fx-border-style: solid; -fx-border-radius: 15;" xmlns="http://javafx.com/javafx/8.0.111" xmlns:fx="http://javafx.com/fxml/1">
+   <children>
+      <Ellipse id="pictureFrame" fill="DODGERBLUE" layoutX="103.0" layoutY="84.0" radiusX="58.0" radiusY="72.0" stroke="BLACK" strokeType="INSIDE" />
+      <Label id="nameLabel" alignment="CENTER" layoutX="23.0" layoutY="172.0" prefHeight="36.0" prefWidth="160.0" style="-fx-label-padding: 10;" text="Label" />
+      <Label id="lifeSpanLabel" alignment="CENTER" layoutX="23.0" layoutY="218.0" prefHeight="36.0" prefWidth="160.0" text="Label" />
+   </children>
+</Pane>

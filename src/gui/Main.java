@@ -3,20 +3,15 @@ package gui;
 import datatree.DataTree;
 import datatree.Person;
 import javafx.application.Application;
-import javafx.beans.property.DoubleProperty;
 import javafx.fxml.FXMLLoader;
-import javafx.scene.Node;
 import javafx.scene.Scene;
-import javafx.scene.canvas.Canvas;
-import javafx.scene.canvas.GraphicsContext;
 import javafx.scene.control.SplitPane;
-import javafx.scene.control.TextField;
 import javafx.scene.layout.VBox;
-import javafx.scene.paint.Color;
 import javafx.stage.Stage;
 
 import java.io.IOException;
 import java.util.Date;
+
 
 public class Main extends Application {
 
@@ -50,7 +45,7 @@ public class Main extends Application {
             SplitPane temp =  (SplitPane) rootLayout.lookup("#mainVBox").lookup("#splitPane");
             ZoomableScrollPane zoomableScrollPane = (ZoomableScrollPane) temp.getItems().get(1).lookup("#zoomPane");
             //TextField textField = (TextField) temp.getItems().get(1).lookup("#searchBox");
-            System.out.println(zoomableScrollPane.getWidth());
+
 
             // Create person for card
             Person eddard = new Person("Eddard", "Stark", Person.SEX.MALE ,new Date(-1637, 1, 12), new Date(-1601, 6, 31), false);
@@ -71,7 +66,6 @@ public class Main extends Application {
             bran.setMother(catelyn);
             rickon.setMother(catelyn);
 
-            //GraphicsContext gc = canvas.getGraphicsContext2D();
 
             DataTree dataTree = new DataTree();
 

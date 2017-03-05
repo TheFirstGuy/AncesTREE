@@ -1,9 +1,8 @@
 package gui.Layout;
 
 /**
- * Created by Urs on 2/26/2017.
- * Abstract class which Handles the layout of cards
+ * Created by Urs on 3/5/2017.
  */
-public abstract class Layout {
-    public abstract void execute();
+public interface Layout {
+    public void execute();
 }

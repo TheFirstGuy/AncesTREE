@@ -30,6 +30,7 @@ public class ZoomableScrollPane extends ScrollPane {
      * @param content Node to be added the Pane?
      */
     public ZoomableScrollPane(){
+        super();
         //Set up FXML
         FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("Zoomable_Scroll_Pane.fxml"));
         fxmlLoader.setRoot(this);
@@ -50,6 +51,7 @@ public class ZoomableScrollPane extends ScrollPane {
         scaleTransform_ = new Scale(scaleValue_, scaleValue_, 0, 0);
         zoomGroup_.getTransforms().add(scaleTransform_);
         zoomGroup_.setOnScroll(new ZoomHandler());
+
     }
 
     /**
@@ -126,7 +128,7 @@ public class ZoomableScrollPane extends ScrollPane {
                 }
 
                 zoomTo(scaleValue_);
-
+                System.out.println(scrollPane.getWidth());
                 scrollEvent.consume();
             }
         }
