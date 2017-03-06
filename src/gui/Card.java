@@ -1,23 +1,18 @@
 package gui;
 
 
-import com.sun.javafx.tk.FontLoader;
-import com.sun.javafx.tk.Toolkit;
 import datatree.Person;
+import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Node;
-import javafx.scene.canvas.GraphicsContext;
 import javafx.scene.control.Label;
 import javafx.scene.layout.Pane;
 import javafx.scene.paint.Color;
 import javafx.scene.shape.Ellipse;
-import javafx.scene.shape.Rectangle;
 import javafx.scene.text.Font;
-import javafx.scene.text.Text;
-import javafx.scene.text.TextAlignment;
 
+import java.io.IOException;
 import java.text.SimpleDateFormat;
-import java.util.Date;
 
 /**
  * Created by TheFirstGuy on 1/5/2017.
@@ -26,6 +21,8 @@ import java.util.Date;
 // Card represents a graphical person in the ancesTree
 public class Card extends Pane {
 
+
+    @FXML private Pane pane;
 
     private Person person_;
     private String lifeSpan_;
@@ -60,6 +57,12 @@ public class Card extends Pane {
         fxmlLoader.setRoot(this);
         fxmlLoader.setController(this);
 
+        try{
+            fxmlLoader.load();
+        }catch (IOException exception){
+            throw new RuntimeException(exception);
+        }
+
         // Get components from fxml
         pictureFrame_ = (Ellipse) this.lookup("#pictureFrame");
         nameLabel_ = (Label) this.lookup("#nameLabel");
@@ -68,9 +71,13 @@ public class Card extends Pane {
         initLifeSpanStr();
 
         // Initialize labels
-        nameLabel_.setText(person_.getFirstName() + " " + person_.getLastName());
-        lifeSpanLabel_.setText(lifeSpan_);
+        if(nameLabel_ != null) {
+            nameLabel_.setText(person_.getFirstName() + " " + person_.getLastName());
 
+            lifeSpanLabel_.setText(lifeSpan_);
+            System.out.println("NULL POINTER");
+        }
+        System.out.print("card: " + this.getWidth());
         setView(this);
     }
 

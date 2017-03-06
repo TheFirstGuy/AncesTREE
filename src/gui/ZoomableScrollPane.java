@@ -25,10 +25,7 @@ public class ZoomableScrollPane extends ScrollPane {
     private double scaleValue_ = 1.0;
     private double delta_ = 0.1;
 
-    /**
-     * Contructor
-     * @param content Node to be added the Pane?
-     */
+
     public ZoomableScrollPane(){
         super();
         //Set up FXML
@@ -128,9 +125,13 @@ public class ZoomableScrollPane extends ScrollPane {
                 }
 
                 zoomTo(scaleValue_);
-                System.out.println(scrollPane.getWidth());
+                System.out.println(getWidth());
                 scrollEvent.consume();
             }
         }
+    }
+
+    public Group getZoomGroup(){
+        return zoomGroup_;
     }
 }

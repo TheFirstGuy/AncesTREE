@@ -4,6 +4,7 @@ import datatree.DataTree;
 import datatree.Person;
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
+import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.SplitPane;
 import javafx.scene.layout.VBox;
@@ -69,6 +70,11 @@ public class Main extends Application {
 
             DataTree dataTree = new DataTree();
 
+            Card card = new Card(eddard);
+            card.relocate(100,100);
+            zoomableScrollPane.getZoomGroup().getChildren().add(card);
+
+
 //            CardManager cardManager = new CardManager(gc, canvas, dataTree);
 //
 //            cardManager.initCards(eddard);
@@ -80,6 +86,8 @@ public class Main extends Application {
 
             primaryStage.setScene(scene);
             primaryStage.show();
+            System.out.println(zoomableScrollPane.getWidth());
+            System.out.println(card.getWidth());
         }
         catch (IOException e){
             e.printStackTrace();

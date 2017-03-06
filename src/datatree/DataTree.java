@@ -13,13 +13,18 @@ public class DataTree {
      */
     private HashSet<Person> family_ = new HashSet<Person>();
 
-    //
+    private int numGenerations_;
     /**
      * List of relationships between persons
      */
     private ArrayList<Relationship> relationships_ = new ArrayList<Relationship>();
 
 
+    public DataTree(){
+        family_ = new HashSet<Person>();
+        relationships_ = new ArrayList<Relationship>();
+        numGenerations_ = 0;
+    }
     /**
      * This method finds person in list which fully matches given name.
      * @param firstName The person's first name
@@ -148,5 +153,139 @@ public class DataTree {
         return partners;
     }
 
+    /**
+     * Gets the persons who are roots of the family (have no parents)
+     * @return Persons with no parents
+     */
+    public ArrayList<Person> getRoots(){
+        ArrayList<Person> roots = new ArrayList<Person>();
+        for(Person person : family_){
+            // Check if person has no parents
+            if(person.getMother() == null && person.getFather() == null){
+                roots.add(person);
+            }
+        }
+        return roots;
+    }
 
+    public ArrayList<Person> getGeneration(int genNum){
+        ArrayList<Person> generation = new ArrayList<Person>();
+        for(Person person : family_){
+            if(person.getGeneration() == genNum){
+                generation.add(person);
+            }
+        }
+        return generation;
+    }
+
+    /**
+     * Resets the generation of all persons in the family tree
+     */
+    private void clearGenerations(){
+        for(Person person : family_){
+            person.setGeneration(0);
+        }
+    }
+
+    /**
+     * Calculates and sets and generations for the family tree
+     * @return leafs in the youngest generation
+     */
+    public HashSet<Person> calcGenerations(){
+        clearGenerations();
+
+        ArrayList<Person> roots = getRoots();
+        HashSet<Person> leafs = new HashSet<Person>();
+
+        for(Person root: roots){
+            leafs.addAll(calcGenerationsHelper(root));
+        }
+        filterDeepestLeafs(leafs);
+        // Store number of generations
+        numGenerations_ = leafs.iterator().next().getGeneration() + 1;
+        return leafs;
+    }
+
+    /**
+     * Recursively calculate generations for each person
+     * @param person root person to
+     * @return Persons from the youngest generation
+     */
+    private HashSet<Person> calcGenerationsHelper(Person person){
+        HashSet<Person> leafs = new HashSet<Person>();
+        ArrayList<Person> children = person.getChildren();
+
+        // If no children, person is a leaf
+        if(children.size() == 0){
+            leafs.add(person);
+        }
+        // Otherwise recursively go through tree
+        else {
+            for (Person child : children) {
+                backPropagateGeneration(child);
+                // Set the childs generation
+                if (child.getGeneration() < (person.getGeneration() + 1)) {
+                    child.setGeneration(person.getGeneration() + 1);
+                    leafs.addAll(calcGenerationsHelper(child));
+                }
+            }
+        }
+        // Correct generational shift by setting all siblings
+        return leafs;
+    }
+
+    /**
+     * Corrects generations of ancestors
+     * @param person Person of interest to correct past generations from
+     */
+    private void backPropagateGeneration(Person person){
+        // Check mother
+        Person mother = person.getMother();
+        Person father = person.getFather();
+        if(mother != null) {
+            if (mother.getGeneration() < (person.getGeneration() - 1)) {
+                // Correct mother's generation
+                mother.setGeneration(person.getGeneration() - 1);
+                backPropagateGeneration(person.getMother());
+            }
+        }
+        // Check father
+        if(father != null){
+            if(father.getGeneration() < (person.getGeneration() - 1)){
+                // Correct father's generation
+                father.setGeneration(person.getGeneration() - 1);
+                backPropagateGeneration(person.getFather());
+            }
+        }
+    }
+
+    /**
+     * Removes leafs that are not of the deepest generation
+     * @param leafs Set of persons to
+     */
+    private void filterDeepestLeafs(HashSet<Person> leafs){
+        int max = 0;
+        // Find max generation
+        for(Person person : leafs){
+            if( max < person.getGeneration()){
+                max = person.getGeneration();
+            }
+        }
+        // Remove all leafs that are less than max
+        Iterator<Person> itr = leafs.iterator();
+        while(itr.hasNext()){
+            Person person = itr.next();
+            if(person.getGeneration() < max){
+                itr.remove();
+            }
+        }
+    }
+
+    public HashSet<Person> getFamily(){
+        return family_;
+    }
+
+    public int getNumGenerations(){
+        return numGenerations_;
+    }
 }

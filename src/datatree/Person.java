@@ -22,14 +22,17 @@ public class Person {
 
 
     // Names of person
-    private String firstName;
-    private ArrayList<String> middleNames = new ArrayList<String>();
-    private String lastName;
+    private String firstName_;
+    private ArrayList<String> middleNames_ = new ArrayList<String>();
+    private String lastName_;
 
     // Dates
-    private Date birthDate;
+    private Date birthDate_;
     private Date deathDate;
     private boolean alive_;
+
+    // Generation
+    private int generation_;
 
 
 
@@ -42,11 +45,12 @@ public class Person {
                   Date birthDate,
                   SEX sex,
                   boolean alive){
-        this.firstName = firstName;
-        this.lastName = lastName;
-        this.birthDate = birthDate;
-        this.sex_ = sex;
-        this.alive_ = alive;
+        firstName_ = firstName;
+        this.lastName_ = lastName;
+        birthDate_ = birthDate;
+        sex_ = sex;
+        alive_ = alive;
+        generation_ = 0;
     }
 
     // Constructor which takes middle names which are separated by spaces
@@ -56,11 +60,11 @@ public class Person {
                   SEX sex,
                   Date birthDate,
                   boolean alive){
-        this.firstName = firstName;
-        this.middleNames = Person.parseMiddleNames(middleNames);
-        this.lastName = lastName;
+        firstName_ = firstName;
+        this.middleNames_ = Person.parseMiddleNames(middleNames);
+        this.lastName_ = lastName;
         this.sex_ = sex;
-        this.birthDate = birthDate;
+        this.birthDate_ = birthDate;
         this.alive_ = alive;
     }
 
@@ -70,10 +74,10 @@ public class Person {
                   Date birthDate,
                   Date deathDate,
                   boolean alive){
-        this.firstName = firstName;
-        this.lastName = lastName;
+        firstName_ = firstName;
+        this.lastName_ = lastName;
         this.sex_ = sex;
-        this.birthDate = birthDate;
+        this.birthDate_ = birthDate;
         this.deathDate = deathDate;
         this.alive_ = alive;
     }
@@ -105,7 +109,7 @@ public class Person {
 
     // Test full equality of a person by matching all of their names
     public static boolean isEqual(Person person1, Person person2){
-        return Person.isEqual(person1.firstName, person1.getMiddleNames(), person1.lastName, person2);
+        return Person.isEqual(person1.firstName_, person1.getMiddleNames(), person1.lastName_, person2);
     }
 
 
@@ -125,7 +129,7 @@ public class Person {
 
     // Tests partial equality of a person by matching the first and last name
     public static boolean partialEqual(Person person1, Person person2){
-        return Person.partialEqual(person1.firstName, person1.lastName, person2);
+        return Person.partialEqual(person1.firstName_, person1.lastName_, person2);
     }
 
     // Tests partial equality of a person by matching the first and last name
@@ -194,35 +198,35 @@ public class Person {
     }
 
     public String getFirstName() {
-        return firstName;
+        return firstName_;
     }
 
     public void setFirstName(String firstName) {
-        this.firstName = firstName;
+        this.firstName_ = firstName;
     }
 
     public ArrayList<String> getMiddleNames() {
-        return middleNames;
+        return middleNames_;
     }
 
     public void addMiddleNames(String middleName) {
-        middleNames.add(middleName);
+        middleNames_.add(middleName);
     }
 
     public String getLastName() {
-        return lastName;
+        return lastName_;
     }
 
     public void setLastName(String lastName) {
-        this.lastName = lastName;
+        lastName_ = lastName;
     }
 
     public Date getBirthDate() {
-        return birthDate;
+        return birthDate_;
     }
 
     public void setBirthDate(Date birthDate) {
-        this.birthDate = birthDate;
+        birthDate_ = birthDate;
     }
 
     public Date getDeathDate() {
@@ -251,6 +255,14 @@ public class Person {
 
     public Person.SEX getSex_(){
         return sex_;
+    }
+
+    public void setGeneration(int generation){
+        generation_ = generation;
+    }
+
+    public int getGeneration(){
+        return generation_;
     }
 
 }
