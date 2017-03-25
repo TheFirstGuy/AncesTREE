@@ -9,14 +9,14 @@ import java.util.Date;
 // Stores a pair of people who are or were partners. Used for marriages, unions, and other relationships
 public class Relationship {
 
-    public Person partner1;
-    public Person partner2;
+    public PersonImpl partner1;
+    public PersonImpl partner2;
 
     public Date startDate;
     public Date stopDate;
 
     // Constructor
-    Relationship(Person partner1, Person partner2, Date startDate, Date stopDate){
+    Relationship(PersonImpl partner1, PersonImpl partner2, Date startDate, Date stopDate){
         this.partner1 = partner1;
         this.partner2 = partner2;
         this.startDate = startDate;
@@ -36,7 +36,7 @@ public class Relationship {
     }
 
     // Check for equality between two people and a relationship
-    public static boolean isEqual(Person partner1, Person partner2, Relationship relationship){
+    public static boolean isEqual(PersonImpl partner1, PersonImpl partner2, Relationship relationship){
         boolean isEqual = false;
         if(relationship.partner1 == partner1 && relationship.partner2 == partner2){
             isEqual = true;

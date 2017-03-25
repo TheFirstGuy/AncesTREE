@@ -35,10 +35,6 @@ public class DataTree {
     public Person find(String firstName, ArrayList<String> middleNames, String lastNames){
         Person match = null;
         for(Person person : family_){
-            if(Person.isEqual(firstName, middleNames, lastNames, person)) {
-                match = person;
-                break;
-            }
         }
         return match;
     }
@@ -52,10 +48,7 @@ public class DataTree {
     public ArrayList<Person> find(String firstName, String lastName){
         ArrayList<Person> people = new ArrayList<Person>();
         for(Person person : family_){
-            if(Person.partialEqual(firstName, lastName, person)){
-                people.add(person);
-                break;
-            }
+
         }
         return people;
     }
@@ -78,8 +71,8 @@ public class DataTree {
      * @param birthdate The person's date of birth
      */
     public void addPerson(String firstName, String lastName, Date birthdate, Person.SEX sex, boolean alive){
-        Person person = new Person(firstName, lastName,  birthdate, sex, alive);
-        family_.add(person);
+        //Person person = new PersonImpl(firstName, lastName,  birthdate, sex, alive);
+        //family_.add(person);
     }
 
     /**
@@ -98,9 +91,9 @@ public class DataTree {
         Relationship existingRelationship = null;
         // Check to see if relationship is found
         for(int i = 0; i < relationships_.size() && existingRelationship == null; i++){
-            if(Relationship.isEqual(partner1,partner2, relationships_.get(i))){
-                existingRelationship = relationships_.get(i);
-            }
+//            if(Relationship.isEqual(partner1,partner2, relationships_.get(i))){
+//                existingRelationship = relationships_.get(i);
+//            }
         }
         // If an existing relationship exists, modify the start and end date
         if(existingRelationship != null) {
@@ -109,8 +102,8 @@ public class DataTree {
         }
         // Create a new relationship and add to list
         else{
-            Relationship relationship = new Relationship(partner1, partner2, startDate, stopDate);
-            relationships_.add(relationship);
+//            Relationship relationship = new Relationship(partner1, partner2, startDate, stopDate);
+//            relationships_.add(relationship);
         }
         return true;
     }
@@ -123,14 +116,15 @@ public class DataTree {
     public HashSet<Person> getSiblings(Person person){
         HashSet<Person> siblings = new HashSet<Person>();
         // Get siblings on the father's side
-        if(person.getFather() != null){
-            siblings.addAll(person.getFather().getChildren());
-        }
-        // Get siblings on the mothers side
-        if(person.getMother() != null){
-            siblings.addAll(person.getMother().getChildren());
-        }
-        return siblings;
+//        if(person.getFather() != null){
+//            siblings.addAll(person.getFather().getChildren());
+//        }
+//        // Get siblings on the mothers side
+//        if(person.getMother() != null){
+//            siblings.addAll(person.getMother().getChildren());
+//        }
+//        return siblings;
+        return null;
     }
 
     /**
@@ -141,15 +135,15 @@ public class DataTree {
     public HashSet<Person> getPartners(Person person){
 
         HashSet<Person> partners = new HashSet<Person>();
-        ArrayList<Person> children = person.getChildren();
-        for(Person child : children){
-            if(person.getSex_() == Person.SEX.MALE){
-                partners.add(child.getMother());
-            }
-            else if(person.getSex_() == Person.SEX.FEMALE){
-                partners.add(child.getFather());
-            }
-        }
+//        ArrayList<Person> children = person.getChildren();
+//        for(Person child : children){
+//            if(person.getSex_() == Person.SEX.MALE){
+//                partners.add(child.getMother());
+//            }
+//            else if(person.getSex_() == Person.SEX.FEMALE){
+//                partners.add(child.getFather());
+//            }
+//        }
         return partners;
     }
 
@@ -171,9 +165,9 @@ public class DataTree {
     public ArrayList<Person> getGeneration(int genNum){
         ArrayList<Person> generation = new ArrayList<Person>();
         for(Person person : family_){
-            if(person.getGeneration() == genNum){
-                generation.add(person);
-            }
+//            if(person.getGeneration() == genNum){
+//                generation.add(person);
+//            }
         }
         return generation;
     }
@@ -202,7 +196,7 @@ public class DataTree {
         }
         filterDeepestLeafs(leafs);
         // Store number of generations
-        numGenerations_ = leafs.iterator().next().getGeneration() + 1;
+//        numGenerations_ = leafs.iterator().next().getGeneration() + 1;
         return leafs;
     }
 
@@ -213,23 +207,23 @@ public class DataTree {
      */
     private HashSet<Person> calcGenerationsHelper(Person person){
         HashSet<Person> leafs = new HashSet<Person>();
-        ArrayList<Person> children = person.getChildren();
-
-        // If no children, person is a leaf
-        if(children.size() == 0){
-            leafs.add(person);
-        }
-        // Otherwise recursively go through tree
-        else {
-            for (Person child : children) {
-                backPropagateGeneration(child);
-                // Set the childs generation
-                if (child.getGeneration() < (person.getGeneration() + 1)) {
-                    child.setGeneration(person.getGeneration() + 1);
-                    leafs.addAll(calcGenerationsHelper(child));
-                }
-            }
-        }
+//        ArrayList<Person> children = person.getChildren();
+//
+//        // If no children, person is a leaf
+//        if(children.size() == 0){
+//            leafs.add(person);
+//        }
+//        // Otherwise recursively go through tree
+//        else {
+//            for (Person child : children) {
+//                backPropagateGeneration(child);
+//                // Set the childs generation
+//                if (child.getGeneration() < (person.getGeneration() + 1)) {
+//                    child.setGeneration(person.getGeneration() + 1);
+//                    leafs.addAll(calcGenerationsHelper(child));
+//                }
+//            }
+//        }
         // Correct generational shift by setting all siblings
         return leafs;
     }
@@ -242,21 +236,21 @@ public class DataTree {
         // Check mother
         Person mother = person.getMother();
         Person father = person.getFather();
-        if(mother != null) {
-            if (mother.getGeneration() < (person.getGeneration() - 1)) {
-                // Correct mother's generation
-                mother.setGeneration(person.getGeneration() - 1);
-                backPropagateGeneration(person.getMother());
-            }
-        }
-        // Check father
-        if(father != null){
-            if(father.getGeneration() < (person.getGeneration() - 1)){
-                // Correct father's generation
-                father.setGeneration(person.getGeneration() - 1);
-                backPropagateGeneration(person.getFather());
-            }
-        }
+//        if(mother != null) {
+//            if (mother.getGeneration() < (person.getGeneration() - 1)) {
+//                // Correct mother's generation
+//                mother.setGeneration(person.getGeneration() - 1);
+//                backPropagateGeneration(person.getMother());
+//            }
+//        }
+//        // Check father
+//        if(father != null){
+//            if(father.getGeneration() < (person.getGeneration() - 1)){
+//                // Correct father's generation
+//                father.setGeneration(person.getGeneration() - 1);
+//                backPropagateGeneration(person.getFather());
+//            }
+//        }
     }
 
     /**
@@ -266,19 +260,19 @@ public class DataTree {
     private void filterDeepestLeafs(HashSet<Person> leafs){
         int max = 0;
         // Find max generation
-        for(Person person : leafs){
-            if( max < person.getGeneration()){
-                max = person.getGeneration();
-            }
-        }
-        // Remove all leafs that are less than max
-        Iterator<Person> itr = leafs.iterator();
-        while(itr.hasNext()){
-            Person person = itr.next();
-            if(person.getGeneration() < max){
-                itr.remove();
-            }
-        }
+//        for(Person person : leafs){
+//            if( max < person.getGeneration()){
+//                max = person.getGeneration();
+//            }
+//        }
+//        // Remove all leafs that are less than max
+//        Iterator<Person> itr = leafs.iterator();
+//        while(itr.hasNext()){
+//            Person person = itr.next();
+//            if(person.getGeneration() < max){
+//                itr.remove();
+//            }
+//        }
     }
 
     public HashSet<Person> getFamily(){

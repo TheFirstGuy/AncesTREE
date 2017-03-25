@@ -10,7 +10,7 @@ import org.junit.runners.Suite;
 @RunWith(Suite.class)
 
 @Suite.SuiteClasses({
-        PersonTest.class
+        PersonImplTest.class
 })
 
 public class DataTreeTestSuit{

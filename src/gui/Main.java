@@ -1,17 +1,17 @@
 package gui;
 
 import datatree.DataTree;
-import datatree.Person;
+import datatree.PersonImpl;
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
-import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.SplitPane;
 import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
 
 import java.io.IOException;
-import java.util.Date;
+import java.util.GregorianCalendar;
+import java.util.GregorianCalendar;
 
 
 public class Main extends Application {
@@ -49,13 +49,13 @@ public class Main extends Application {
 
 
             // Create person for card
-            Person eddard = new Person("Eddard", "Stark", Person.SEX.MALE ,new Date(-1637, 1, 12), new Date(-1601, 6, 31), false);
-            Person catelyn = new Person("Catelyn", "Tully", Person.SEX.FEMALE, new Date(-1636, 4, 24), new Date(-1601, 8, 23), false);
-            Person robb = new Person("Robb", "Stark", Person.SEX.MALE, new Date(-1617, 2, 10), new Date(-1601, 3, 10), false);
-            Person sansa = new Person("Sansa", "Stark", Person.SEX.FEMALE, new Date(-1614, 3, 12), null, true);
-            Person arya = new Person("Arya", "Stark", Person.SEX.FEMALE, new Date(-1611, 3, 12), null, true);
-            Person bran = new Person("Bran", "Stark", Person.SEX.MALE, new Date(-1610, 5, 2), null, true);
-            Person rickon = new Person("Rickon", "Stark", Person.SEX.MALE, new Date(-1605, 7, 23), null, true);
+            PersonImpl eddard = new PersonImpl("Eddard", "Stark", PersonImpl.SEX.MALE ,new GregorianCalendar(-1637, 1, 12), new GregorianCalendar(-1601, 6, 31), false);
+            PersonImpl catelyn = new PersonImpl("Catelyn", "Tully", PersonImpl.SEX.FEMALE, new GregorianCalendar(-1636, 4, 24), new GregorianCalendar(-1601, 8, 23), false);
+            PersonImpl robb = new PersonImpl("Robb", "Stark", PersonImpl.SEX.MALE, new GregorianCalendar(-1617, 2, 10), new GregorianCalendar(-1601, 3, 10), false);
+            PersonImpl sansa = new PersonImpl("Sansa", "Stark", PersonImpl.SEX.FEMALE, new GregorianCalendar(-1614, 3, 12), null, true);
+            PersonImpl arya = new PersonImpl("Arya", "Stark", PersonImpl.SEX.FEMALE, new GregorianCalendar(-1611, 3, 12), null, true);
+            PersonImpl bran = new PersonImpl("Bran", "Stark", PersonImpl.SEX.MALE, new GregorianCalendar(-1610, 5, 2), null, true);
+            PersonImpl rickon = new PersonImpl("Rickon", "Stark", PersonImpl.SEX.MALE, new GregorianCalendar(-1605, 7, 23), null, true);
             robb.setFather(eddard);
             sansa.setFather(eddard);
             arya.setFather(eddard);

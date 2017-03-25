@@ -1,12 +1,11 @@
 package gui.Layout;
 
 import datatree.DataTree;
-import datatree.Person;
+import datatree.PersonImpl;
 import gui.Card;
 import gui.CardManager;
 
 import java.util.ArrayList;
-import java.util.List;
 
 
 /**
@@ -30,12 +29,12 @@ public class FullTreeLayout implements Layout {
     }
 
     private void setUpGenerations(){
-        ArrayList<Person> firstGeneration = dataTree_.getGeneration(0);
-
-        // Get cards
-        for(Person person: firstGeneration){
-            cards_.get(0).add(cardManager_.getCards_().get(person));
-        }
+//        ArrayList<PersonImpl> firstGeneration = dataTree_.getGeneration(0);
+//
+//        // Get cards
+//        for(PersonImpl person: firstGeneration){
+//            cards_.get(0).add(cardManager_.getCards_().get(person));
+//        }
 
 
     }
