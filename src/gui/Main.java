@@ -1,6 +1,6 @@
 package gui;
 
-import datatree.DataTree;
+import datatree.DataTreeImpl;
 import datatree.PersonImpl;
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
@@ -10,7 +10,6 @@ import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
 
 import java.io.IOException;
-import java.util.GregorianCalendar;
 import java.util.GregorianCalendar;
 
 
@@ -68,7 +67,7 @@ public class Main extends Application {
             rickon.setMother(catelyn);
 
 
-            DataTree dataTree = new DataTree();
+            DataTreeImpl dataTree = new DataTreeImpl();
 
             Card card = new Card(eddard);
             card.relocate(100,100);

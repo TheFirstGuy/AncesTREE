@@ -1,6 +1,6 @@
 package gui;
 
-import datatree.DataTree;
+import datatree.DataTreeImpl;
 import datatree.Person;
 import javafx.scene.shape.Rectangle;
 import java.util.HashMap;
@@ -36,7 +36,7 @@ public class CardManager {
     /**
      *  The data tree which ancestry tree data is stored
      */
-    private DataTree dataTree_;
+    private DataTreeImpl dataTree_;
 
     private final static int X_PADDING = 50;
     private final static int Y_PADDING = 50;
@@ -46,7 +46,7 @@ public class CardManager {
      *  @param scrollPane The pane which the cards are drawn
      *  @param dataTree The data tree which ancestry tree data is stored
      */
-    public CardManager( ZoomableScrollPane scrollPane, DataTree dataTree){
+    public CardManager( ZoomableScrollPane scrollPane, DataTreeImpl dataTree){
         scrollPane_ = scrollPane;
         dataTree_ = dataTree;
 

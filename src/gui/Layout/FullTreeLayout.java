@@ -1,7 +1,6 @@
 package gui.Layout;
 
-import datatree.DataTree;
-import datatree.PersonImpl;
+import datatree.DataTreeImpl;
 import gui.Card;
 import gui.CardManager;
 
@@ -13,11 +12,11 @@ import java.util.ArrayList;
  */
 public class FullTreeLayout implements Layout {
 
-    private DataTree dataTree_;
+    private DataTreeImpl dataTree_;
     private CardManager cardManager_;
     private ArrayList<ArrayList<Card>> cards_;
 
-    public FullTreeLayout(DataTree dataTree, CardManager cardManager){
+    public FullTreeLayout(DataTreeImpl dataTree, CardManager cardManager){
         dataTree_ = dataTree;
         cardManager_ = cardManager;
     }

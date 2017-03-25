@@ -110,12 +110,18 @@ public class PersonImpl implements Person{
 
     @Override
     public void setFather(Person father) {
-        // Remove from the father's list of children if one existed
-        if(this.father != null){
-            this.father.removeChild(this);
-        }
-        this.father = father;
 
+        if( validateParent(father, SEX.MALE) ) {
+            // Remove from the father's list of children if one existed
+            if (this.father != null) {
+                this.father.removeChild(this);
+            }
+            if (this.father == null || !this.father.equals(father)) {
+                father.addChild(this);
+            }
+            this.father = father;
+
+        }
     }
 
     @Override
@@ -136,7 +142,7 @@ public class PersonImpl implements Person{
 
     @Override
     public Person[] getChildren() {
-        return (Person[])children.toArray();
+        return children.toArray(new Person[children.size()]);
     }
 
     @Override
@@ -144,14 +150,16 @@ public class PersonImpl implements Person{
         // Check that child is not already set
         if(!children.contains(child)){
             children.add(child);
+
+            // Set as parent
+            if(sex_ == SEX.MALE){
+                child.setFather(this);
+            }
+            else if(sex_ == SEX.FEMALE){
+                child.setMother(this);
+            }
         }
-        // Set at parent
-        if(sex_ == SEX.MALE){
-            child.setFather(this);
-        }
-        else if(sex_ == SEX.FEMALE){
-            child.setMother(this);
-        }
+
     }
 
     @Override
@@ -263,6 +271,26 @@ public class PersonImpl implements Person{
             }
             return middleNameList;
         }
+    }
+
+    private boolean validateParent(Person parent, Person.SEX expectedSex){
+        boolean isValid = true;
+        if(parent == null){
+            isValid = false;
+        }
+        else if(parent.getSex() != expectedSex){
+            isValid = false;
+        }
+        else if(parent.getBirthDate().after(this.birthDate_)){
+            isValid = false;
+        }
+        else if(expectedSex == SEX.FEMALE && this.father != null && this.father.equals(parent)){
+            isValid = false;
+        }
+        else if(expectedSex == SEX.MALE && this.mother != null && this.mother.equals(parent)){
+            isValid = false;
+        }
+        return isValid;
     }
 
 }
