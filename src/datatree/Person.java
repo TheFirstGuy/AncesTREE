@@ -84,29 +84,6 @@ public class Person {
 
 
 
-
-    // Parses a string of middle names into an arraylist of names
-    public static ArrayList<String> parseMiddleNames(String middleNames){
-        // TODO: Add support for multiword names
-        // Split based on space.
-        String[] names = middleNames.split(" ");
-
-        // If no names return empty list
-        if(names == null){
-            return new ArrayList<String>(0);
-        }
-        // Otherwise allocate only enough space for list
-        else{
-            ArrayList<String> middleNameList = new ArrayList<String>(names.length);
-
-            // Copy names
-            for( int i = 0; i < names.length; i++){
-                middleNameList.add(names[i]);
-            }
-            return middleNameList;
-        }
-    }
-
     // Test full equality of a person by matching all of their names
     public static boolean isEqual(Person person1, Person person2){
         return Person.isEqual(person1.firstName_, person1.getMiddleNames(), person1.lastName_, person2);
@@ -263,6 +240,28 @@ public class Person {
 
     public int getGeneration(){
         return generation_;
+    }
+
+    // Parses a string of middle names into an arraylist of names
+    private static ArrayList<String> parseMiddleNames(String middleNames){
+        // TODO: Add support for multiword names
+        // Split based on space.
+        String[] names = middleNames.split(" ");
+
+        // If no names return empty list
+        if(names == null){
+            return new ArrayList<String>(0);
+        }
+        // Otherwise allocate only enough space for list
+        else{
+            ArrayList<String> middleNameList = new ArrayList<String>(names.length);
+
+            // Copy names
+            for( int i = 0; i < names.length; i++){
+                middleNameList.add(names[i]);
+            }
+            return middleNameList;
+        }
     }
 
 }
