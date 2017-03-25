@@ -25,7 +25,7 @@ public class PersonImplTest {
     }
 
     @Test
-    public void testTwoPersonsEqualNominal(){
+    public void tesEqualsNominal(){
         PersonImpl targetFemale = this.female;
         PersonImpl targetMale = this.male;
         PersonImpl sameNameFemale = new PersonImpl("Jane", "Smith", new GregorianCalendar(1,2,3), Person.SEX.FEMALE, true);
@@ -36,7 +36,13 @@ public class PersonImplTest {
         assertTrue(this.male.equals(targetMale));
         assertFalse(targetFemale.equals(targetMale));
         assertFalse(sameNameFemale.equals(this.female));
+    }
 
+    @Test
+    public void testEqualsNullObjects(){
+        assertFalse(male.equals(null));
+        assertFalse(male.equals(7));
+        assertFalse(male.equals("Test String"));
     }
 
 

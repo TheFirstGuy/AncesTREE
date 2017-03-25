@@ -26,7 +26,7 @@ public class PersonImpl implements Person{
 
     // Dates
     private Calendar birthDate_;
-    private Calendar deathDate;
+    private Calendar deathDate_;
     private boolean alive_;
 
     // Generation
@@ -76,16 +76,30 @@ public class PersonImpl implements Person{
         this.lastName_ = lastName;
         this.sex_ = sex;
         this.birthDate_ = birthDate;
-        this.deathDate = deathDate;
+        this.deathDate_ = deathDate;
         this.alive_ = alive;
     }
 
 
 
-    // Test full equality of a person by matching all of their names
     @Override
     public boolean equals(Object obj){
-        return true;
+        boolean isEquals = false;
+        if(this == obj){
+            isEquals = true;
+        }
+        else if(obj != null && getClass() == obj.getClass()){
+            PersonImpl other = (PersonImpl)obj;
+            isEquals = this.alive_ == other.alive_ &&
+                    this.birthDate_.equals(other.birthDate_) &&
+                    this.deathDate_.equals(other.deathDate_) &&
+                    this.firstName_.equals(other.firstName_) &&
+                    this.middleNames_.equals(other.middleNames_) &&
+                    this.lastName_.equals(other.lastName_) &&
+                    this.children.equals(other.children) &&
+                    this.generation_ == other.generation_;
+        }
+        return isEquals;
     }
 
    // Getters and Setters
@@ -187,12 +201,12 @@ public class PersonImpl implements Person{
 
     @Override
     public Calendar getDeathDate() {
-        return deathDate;
+        return deathDate_;
     }
 
     @Override
     public void setDeathDate(Calendar deathDate) {
-        this.deathDate = deathDate;
+        this.deathDate_ = deathDate;
     }
 
     public String getDescription() {

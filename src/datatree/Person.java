@@ -9,8 +9,14 @@ public interface Person {
 
     public enum SEX{ MALE, FEMALE}
 
+    /**
+     * Returns if Person instance is equal to an object
+     * @param obj Other object to compare
+     * @return 'true' if equal, 'false' otherwise
+     */
     public boolean equals(Object obj);
 
+    // Getters and Setters
     public Person getFather();
 
     public void setFather(Person father);

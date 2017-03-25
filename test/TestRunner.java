@@ -8,13 +8,16 @@ import org.junit.runner.notification.Failure;
  */
 public class TestRunner {
     public static void main(String[] args){
+        int totalTests = 0;
         Result results = JUnitCore.runClasses(DataTreeTestSuit.class);
+        totalTests += results.getRunCount();
 
         // Print results
         for(Failure failure : results.getFailures()){
             System.out.println(failure.getTestHeader() + ": " + failure.getTrace());
         }
 
-        System.out.print("Unit Tests were " + ((results.wasSuccessful()) ? "successful" : "failed"));
+        System.out.println(totalTests + " run. " + results.getFailureCount() + " failed.");
+        System.out.println("Unit Tests were " + ((results.wasSuccessful()) ? "successful" : "failed"));
     }
 }
