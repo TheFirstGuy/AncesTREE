@@ -21,9 +21,11 @@ public class ZoomableScrollPane extends ScrollPane {
 
     private Group zoomGroup_;
     private Scale scaleTransform_;
-    private Node content_;
     private double scaleValue_ = 1.0;
     private double delta_ = 0.1;
+
+    public static double MIN_SCALE_VALUE = 0.1;
+    public static double MAX_SCALE_VALUE = 3.0;
 
 
     public ZoomableScrollPane(){
@@ -45,9 +47,10 @@ public class ZoomableScrollPane extends ScrollPane {
         contentGroup.getChildren().add(zoomGroup_);
         //zoomGroup_.getChildren().add(content_);
         setContent(contentGroup);
+        contentGroup.autoSizeChildrenProperty().set(true);
         scaleTransform_ = new Scale(scaleValue_, scaleValue_, 0, 0);
         zoomGroup_.getTransforms().add(scaleTransform_);
-        zoomGroup_.setOnScroll(new ZoomHandler());
+        this.setOnScroll(new ZoomHandler());
 
     }
 
@@ -118,14 +121,15 @@ public class ZoomableScrollPane extends ScrollPane {
             // if (scrollEvent.isControlDown())
             {
 
-                if (scrollEvent.getDeltaY() < 0) {
+                if (scrollEvent.getDeltaY() < 0 && (scaleValue_ - delta_) > MIN_SCALE_VALUE) {
                     scaleValue_ -= delta_;
-                } else {
+                }
+                else if(scrollEvent.getDeltaY() > 0 && (scaleValue_ + delta_) < MAX_SCALE_VALUE) {
                     scaleValue_ += delta_;
                 }
 
                 zoomTo(scaleValue_);
-                System.out.println(getWidth());
+                System.out.println(widthProperty());
                 scrollEvent.consume();
             }
         }

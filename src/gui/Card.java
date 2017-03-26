@@ -6,11 +6,15 @@ import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Node;
 import javafx.scene.control.Label;
+import javafx.scene.image.Image;
+import javafx.scene.image.ImageView;
 import javafx.scene.layout.Pane;
 import javafx.scene.paint.Color;
+import javafx.scene.paint.ImagePattern;
 import javafx.scene.shape.Ellipse;
 import javafx.scene.text.Font;
 
+import java.io.File;
 import java.io.IOException;
 import java.text.SimpleDateFormat;
 
@@ -75,8 +79,20 @@ public class Card extends Pane {
             nameLabel_.setText(person_.getFirstName() + " " + person_.getLastName());
 
             lifeSpanLabel_.setText(lifeSpan_);
-            System.out.println("NULL POINTER");
+            lifeSpanLabel_.autosize();
         }
+
+        // Initialize image
+        String imageUrl;
+        if(person_.getSex() == Person.SEX.MALE){
+            imageUrl = "data/images/default_male.png";
+        }
+        else{
+            imageUrl = "data/images/default_female.png";
+        }
+        Image image = new Image(new File(imageUrl).toURI().toString());
+        ImagePattern pattern = new ImagePattern(image);
+        pictureFrame_.setFill(pattern);
         System.out.print("card: " + this.getWidth());
         setView(this);
     }
@@ -93,7 +109,7 @@ public class Card extends Pane {
             lifeSpan_ = "?";
         }
         else{
-            lifeSpan_ = simpleDateFormat.format(person_.getBirthDate());
+            lifeSpan_ = simpleDateFormat.format(person_.getBirthDate().getTime());
         }
         // Check if death date is known
         if(!person_.isAlive()){
@@ -101,7 +117,7 @@ public class Card extends Pane {
                 lifeSpan_ += " - ?";
             }
             else{
-                lifeSpan_ += " - " + simpleDateFormat.format(person_.getDeathDate());
+                lifeSpan_ += " - " + simpleDateFormat.format(person_.getDeathDate().getTime());
             }
         }
     }

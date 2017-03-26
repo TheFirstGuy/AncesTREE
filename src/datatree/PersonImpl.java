@@ -283,25 +283,29 @@ public class PersonImpl implements Person{
         }
     }
 
+    @Override
     public String getDescription() {
         return description;
     }
 
+    @Override
     public void setDescription(String description) {
         this.description = description;
     }
 
+    @Override
     public boolean isAlive() {
         return alive_;
     }
 
+    @Override
     public void setAlive(boolean isAlive){
         alive_ = isAlive;
     }
 
     @Override
     public void setSex(Person.SEX sex) {
-
+        this.sex_ = sex;
     }
 
     @Override
