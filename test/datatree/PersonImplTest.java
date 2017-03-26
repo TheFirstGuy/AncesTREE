@@ -270,4 +270,25 @@ public class PersonImplTest {
         assertNotEquals(this.female.getBirthDate(), birthDate);
 
     }
+
+    @Test
+    public void testSetDeathDateNominal(){
+        GregorianCalendar deathDate = new GregorianCalendar(2015,6,2);
+
+        this.female.setDeathDate(deathDate);
+
+        assertEquals(this.female.getDeathDate(), deathDate);
+    }
+
+    @Test
+    public void testSetDeathBeforeBirth(){
+        GregorianCalendar deathBeforeBirth = new GregorianCalendar(1830,6,3);
+
+        this.female.setDeathDate(deathBeforeBirth);
+
+        assertNotEquals(this.female.getDeathDate(), deathBeforeBirth);
+        assertNull(this.female.getDeathDate());
+    }
+
+
 }

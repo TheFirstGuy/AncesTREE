@@ -278,7 +278,9 @@ public class PersonImpl implements Person{
 
     @Override
     public void setDeathDate(Calendar deathDate) {
-        this.deathDate_ = deathDate;
+        if(this.birthDate_.before(deathDate)){
+            this.deathDate_ = deathDate;
+        }
     }
 
     public String getDescription() {
