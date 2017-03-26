@@ -215,4 +215,59 @@ public class PersonImplTest {
         assertNull(this.female.getMother());
         assertEquals(targetMother.getChildren().length, 0);
     }
+
+    @Test
+    public void testSetBirthdateNominal(){
+        GregorianCalendar nominalBirthday = new GregorianCalendar(1950, 1,1);
+
+        this.female.setBirthDate(nominalBirthday);
+
+        assertEquals(this.female.getBirthDate(), nominalBirthday);
+    }
+
+    @Test
+    public void testSetBirthAfterDeath(){
+        GregorianCalendar bornAfterDeath = new GregorianCalendar(2050,3,2);
+        GregorianCalendar death = new GregorianCalendar(2000, 3,4);
+        GregorianCalendar currentBirthDate = (GregorianCalendar)this.female.getBirthDate();
+
+        this.female.setDeathDate(death);
+        this.female.setBirthDate(bornAfterDeath);
+
+        assertNotEquals(this.female.getBirthDate(), bornAfterDeath);
+        assertEquals(this.female.getBirthDate(), currentBirthDate);
+    }
+
+    @Test
+    public void testSetBirthBeforeParents(){
+        Person targetMother = new PersonImpl("Mom", "Smith",
+                new GregorianCalendar(1900,2,3), Person.SEX.FEMALE, true);
+        Person targetFather = new PersonImpl("Dad", "Smith",
+                new GregorianCalendar(1900,2,3), Person.SEX.MALE, true);
+        GregorianCalendar birthDate = new GregorianCalendar(1850,3,4);
+        GregorianCalendar currentBirthDate = (GregorianCalendar)this.female.getBirthDate();
+
+        this.female.setMother(targetMother);
+        this.female.setFather(targetFather);
+        this.female.setBirthDate(birthDate);
+
+        assertNotEquals(this.female.getBirthDate(), birthDate);
+        assertEquals(this.female.getBirthDate(), currentBirthDate);
+    }
+
+    @Test
+    public void testSetBirthAfterChildren(){
+        Person femaleChild = new PersonImpl("Child", "Smith",
+                new GregorianCalendar(2010, 2, 3), Person.SEX.FEMALE, true);
+        Person maleChild = new PersonImpl("Child", "Smith",
+                new GregorianCalendar(2011, 2,3), Person.SEX.MALE, false);
+        GregorianCalendar birthDate = new GregorianCalendar(2050,3,2);
+
+        this.female.addChild(femaleChild);
+        this.female.addChild(maleChild);
+        this.female.setBirthDate(birthDate);
+
+        assertNotEquals(this.female.getBirthDate(), birthDate);
+
+    }
 }

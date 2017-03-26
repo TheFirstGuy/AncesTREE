@@ -90,10 +90,23 @@ public class PersonImpl implements Person{
         }
         else if(obj != null && getClass() == obj.getClass()){
             PersonImpl other = (PersonImpl)obj;
-            isEquals = this.alive_ == other.alive_ &&
-                    this.birthDate_.equals(other.birthDate_) &&
-                    this.deathDate_.equals(other.deathDate_) &&
-                    this.firstName_.equals(other.firstName_) &&
+            isEquals = this.alive_ == other.alive_;
+
+            if(this.birthDate_ != null && other.birthDate_ != null){
+                isEquals &= this.birthDate_.equals(other.birthDate_);
+            }
+            else{
+                isEquals &= this.birthDate_ == other.birthDate_;
+            }
+
+            if(this.deathDate_ != null && other.deathDate_ != null){
+                isEquals &= this.deathDate_.equals(other.deathDate_);
+            }
+            else{
+                isEquals &= this.deathDate_ == other.deathDate_;
+            }
+
+            isEquals &= this.firstName_.equals(other.firstName_) &&
                     this.middleNames_.equals(other.middleNames_) &&
                     this.lastName_.equals(other.lastName_) &&
                     this.children.equals(other.children) &&
@@ -234,7 +247,28 @@ public class PersonImpl implements Person{
 
     @Override
     public void setBirthDate(Calendar birthDate) {
-        birthDate_ = birthDate;
+        // Check birth is not before death
+        if(this.deathDate_ != null && this.deathDate_.before(birthDate)){
+            return;
+        }
+            // Check birth is not before father's birth
+        else if(this.father != null && this.father.getBirthDate().after(birthDate)){
+            return;
+        }
+        // Check birth is not before mother's birth
+        else if(this.mother != null && this.mother.getBirthDate().after(birthDate)){
+            return;
+        }
+        // Check birth is not after children's birth
+        else{
+            for(Person child : this.children){
+                if(child.getBirthDate().before(birthDate)){
+                    return;
+                }
+            }
+            birthDate_ = birthDate;
+        }
+
     }
 
     @Override
