@@ -83,6 +83,77 @@ public class PersonImplTest {
         assertNotEquals(this.female.getFather(), femaleFather);
     }
 
+    @Test
+    public void testSetMotherNominal(){
+        Person targetMother = new PersonImpl("Mom", "Smith",
+                new GregorianCalendar(1900,2,3), Person.SEX.FEMALE, true);
+        this.female.setMother(targetMother);
+        assertEquals(this.female.getMother(), targetMother);
+    }
+
+    @Test
+    public void testSetMaleMother(){
+        Person maleMother = new PersonImpl("Mom", "Smith",
+                new GregorianCalendar( 1960,2,3), Person.SEX.MALE, true);
+        this.female.setMother(maleMother);
+        assertNotEquals(this.female.getMother(), maleMother);
+    }
+
+    @Test
+    public void testSetYoungerMother(){
+        Person youngerMother = new PersonImpl("Mom", "Smith",
+                new GregorianCalendar( 2010,2,3), Person.SEX.FEMALE, true);
+        this.female.setMother(youngerMother);
+        assertNotEquals(this.female.getMother(), youngerMother);
+    }
+
+    @Test
+    public void testDeadMother(){
+        Person deadMother = new PersonImpl("Mom", "Smith",
+                new GregorianCalendar( 1960,2,3), Person.SEX.FEMALE, false);
+        this.female.setMother(deadMother);
+        assertEquals(this.female.getMother(), deadMother);
+    }
+
+    @Test
+    public void testAddChildNominal(){
+        Person femaleChild = new PersonImpl("Child", "Smith",
+                new GregorianCalendar(2010, 2, 3), Person.SEX.FEMALE, true);
+        Person maleChild = new PersonImpl("Child", "Smith",
+                new GregorianCalendar(2011, 2,3), Person.SEX.MALE, false);
+
+
+        this.female.addChild(femaleChild);
+        this.male.addChild(femaleChild);
+        this.female.addChild(maleChild);
+        this.male.addChild(maleChild);
+
+        assertEquals(this.female.getChildren()[0], femaleChild);
+        assertEquals(this.male.getChildren()[0], femaleChild);
+        assertEquals(femaleChild.getMother(), this.female);
+        assertEquals(femaleChild.getFather(), this.male);
+        assertEquals(this.female.getChildren()[1], maleChild);
+        assertEquals(this.male.getChildren()[1], maleChild);
+        assertEquals(maleChild.getFather(), this.male);
+        assertEquals(femaleChild.getMother(), this.female);
+    }
+
+    @Test
+    public void testAddOlderChild(){
+        Person olderChild = new PersonImpl("Child","Smith",
+                new GregorianCalendar(1920,2,1), Person.SEX.FEMALE, true);
+
+        this.female.addChild(olderChild);
+        assertEquals(this.female.getChildren().length, 0);
+        assertNull(olderChild.getMother());
+    }
+
+    @Test
+    public void testAddNullChild(){
+        this.female.addChild(null);
+
+        assertEquals(this.female.getChildren().length, 0);
+    }
 
 
 

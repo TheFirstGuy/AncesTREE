@@ -131,13 +131,16 @@ public class PersonImpl implements Person{
 
     @Override
     public void setMother(Person mother) {
-        // Remove from mother's list of children if one existed
-        if(this.mother != null){
-            this.mother.removeChild(this);
+        if( validateParent(mother, SEX.FEMALE) ) {
+            // Remove from the father's list of children if one existed
+            if (this.mother != null) {
+                this.mother.removeChild(this);
+            }
+            if (this.mother == null || !this.mother.equals(mother)) {
+                mother.addChild(this);
+            }
+            this.mother = mother;
         }
-        this.mother = mother;
-        // Check that not already set as child
-
     }
 
     @Override
@@ -148,18 +151,19 @@ public class PersonImpl implements Person{
     @Override
     public void addChild(Person child) {
         // Check that child is not already set
-        if(!children.contains(child)){
-            children.add(child);
+        if (child != null){
+            if (!children.contains(child) &&
+                    child.getBirthDate().after(this.getBirthDate())) {
+                children.add(child);
 
-            // Set as parent
-            if(sex_ == SEX.MALE){
-                child.setFather(this);
-            }
-            else if(sex_ == SEX.FEMALE){
-                child.setMother(this);
+                // Set as parent
+                if (sex_ == SEX.MALE) {
+                    child.setFather(this);
+                } else if (sex_ == SEX.FEMALE) {
+                    child.setMother(this);
+                }
             }
         }
-
     }
 
     @Override

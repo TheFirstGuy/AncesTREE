@@ -5,5 +5,5 @@ package datatree;
  */
 public interface DataTree {
 
-    
+
 }
