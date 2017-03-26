@@ -155,7 +155,64 @@ public class PersonImplTest {
         assertEquals(this.female.getChildren().length, 0);
     }
 
+    @Test
+    public void testAddingSameChild(){
+        Person child = new PersonImpl("Child", "Smith",
+                new GregorianCalendar(2010, 2, 3), Person.SEX.FEMALE, true);
+        this.female.addChild(child);
+        this.female.addChild(child);
+        assertEquals(this.female.getChildren().length, 1);
+    }
 
+    @Test
+    public void testRemoveChild(){
+        Person femaleChild = new PersonImpl("Child", "Smith",
+                new GregorianCalendar(2010, 2, 3), Person.SEX.FEMALE, true);
+        Person maleChild = new PersonImpl("Child", "Smith",
+                new GregorianCalendar(2011, 2,3), Person.SEX.MALE, false);
 
+        this.female.addChild(femaleChild);
+        this.female.addChild(maleChild);
+        this.female.removeChild(femaleChild);
 
+        assertEquals(this.female.getChildren().length, 1);
+        assertEquals(this.female.getChildren()[0], maleChild);
+        assertNull(femaleChild.getMother());
+    }
+
+    @Test
+    public void testRemoveNullChild(){
+        Person child = new PersonImpl("Child", "Smith",
+                new GregorianCalendar(2010, 2, 3), Person.SEX.FEMALE, true);
+
+        this.female.addChild(child);
+        this.female.removeChild(null);
+
+        assertEquals(this.female.getChildren().length, 1);
+        assertEquals(this.female.getChildren()[0], child);
+    }
+
+    @Test
+    public void testRemoveFather(){
+        Person targetFather = new PersonImpl("Dad", "Smith",
+                new GregorianCalendar(1900,2,3), Person.SEX.MALE, true);
+
+        this.female.setFather(targetFather);
+        this.female.removeFather();
+
+        assertNull(this.female.getFather());
+        assertEquals(targetFather.getChildren().length, 0);
+    }
+
+    @Test
+    public void testRemoveMother(){
+        Person targetMother = new PersonImpl("Mom", "Smith",
+                new GregorianCalendar(1900,2,3), Person.SEX.FEMALE, true);
+
+        this.female.setMother(targetMother);
+        this.female.removeMother();
+
+        assertNull(this.female.getMother());
+        assertEquals(targetMother.getChildren().length, 0);
+    }
 }

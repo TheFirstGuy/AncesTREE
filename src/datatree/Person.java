@@ -21,9 +21,13 @@ public interface Person {
 
     public void setFather(Person father);
 
+    public void removeFather();
+
     public Person getMother();
 
     public void setMother(Person mother);
+
+    public void removeMother();
 
     public Person[] getChildren();
 

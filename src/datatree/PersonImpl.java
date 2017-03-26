@@ -125,6 +125,15 @@ public class PersonImpl implements Person{
     }
 
     @Override
+    public void removeFather(){
+        if(this.father != null){
+            Person oldFather = this.father;
+            this.father = null;
+            oldFather.removeChild(this);
+        }
+    }
+
+    @Override
     public Person getMother() {
         return mother;
     }
@@ -140,6 +149,15 @@ public class PersonImpl implements Person{
                 mother.addChild(this);
             }
             this.mother = mother;
+        }
+    }
+
+    @Override
+    public void removeMother(){
+        if(this.mother != null){
+            Person oldMother = this.mother;
+            this.mother = null;
+            oldMother.removeChild(this);
         }
     }
 
@@ -168,7 +186,15 @@ public class PersonImpl implements Person{
 
     @Override
     public void removeChild(Person child){
-        children.remove(child);
+        if(child != null) {
+            children.remove(child);
+            if(this.sex_ == SEX.FEMALE && child.getMother() != null && child.getMother().equals(this)){
+                child.removeMother();
+            }
+            else if(this.sex_ == SEX.MALE && child.getFather() != null && child.getFather().equals(this)){
+                child.removeFather();
+            }
+        }
     }
 
     @Override
