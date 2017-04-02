@@ -1,16 +1,26 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+<?import javafx.geometry.Insets?>
 <?import javafx.scene.canvas.Canvas?>
-<?import javafx.scene.control.*?>
-<?import javafx.scene.Cursor?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.Menu?>
+<?import javafx.scene.control.MenuBar?>
+<?import javafx.scene.control.MenuItem?>
+<?import javafx.scene.control.SeparatorMenuItem?>
+<?import javafx.scene.control.SplitPane?>
+<?import javafx.scene.control.TextArea?>
+<?import javafx.scene.control.TextField?>
 <?import javafx.scene.effect.DropShadow?>
-<?import javafx.scene.layout.*?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.VBox?>
 <?import javafx.scene.shape.Ellipse?>
 <?import javafx.scene.text.Font?>
-<?import javafx.scene.text.TextFlow?>
+
 <?import gui.ZoomableScrollPane?>
 
-<VBox id="mainVBox" prefHeight="787.0" prefWidth="1335.0" xmlns="http://javafx.com/javafx/8.0.111" xmlns:fx="http://javafx.com/fxml/1">
+<VBox id="mainVBox" prefHeight="787.0" prefWidth="1335.0" xmlns="http://javafx.com/javafx/8.0.102" xmlns:fx="http://javafx.com/fxml/1">
   <children>
     <MenuBar VBox.vgrow="NEVER">
       <menus>
@@ -55,31 +65,42 @@
         <items>
           <AnchorPane minWidth="0.0" prefHeight="160.0" prefWidth="100.0" style="-fx-max-width: 300; -fx-min-width: 300; -fx-background-color: white;">
                <children>
-                  <StackPane layoutX="93.0" layoutY="21.0">
+                  <HBox alignment="BOTTOM_RIGHT" layoutX="80.0" layoutY="21.0" spacing="10">
                      <children>
-                        <Ellipse fill="DODGERBLUE" radiusX="59.0" radiusY="75.0" stroke="BLACK" strokeType="INSIDE" strokeWidth="2.0">
+                        <Ellipse fill="DODGERBLUE" layoutX="30" radiusX="65.0" radiusY="65.0" stroke="BLACK" strokeType="INSIDE" strokeWidth="2.0">
                            <effect>
                               <DropShadow offsetX="2.0" offsetY="2.0" />
                            </effect>
-                           <cursor>
-                              <Cursor fx:constant="DEFAULT" />
-                           </cursor>
                         </Ellipse>
+                         <Button alignment="BOTTOM_RIGHT" graphicTextGap="0.0" layoutX="211.0" layoutY="141.0" mnemonicParsing="false" text="⚙" textAlignment="CENTER">
+                             <font>
+                                 <Font name="System Bold Italic" size="14.0" />
+                             </font>
+                         </Button>
                      </children>
-                  </StackPane>
-                  <TextFlow layoutY="224.0" nodeOrientation="RIGHT_TO_LEFT" prefHeight="535.0" prefWidth="322.0" />
-                  <Button alignment="TOP_LEFT" graphicTextGap="0.0" layoutX="211.0" layoutY="141.0" mnemonicParsing="false" text="⚙" textAlignment="CENTER">
-                     <font>
-                        <Font name="System Bold Italic" size="14.0" />
-                     </font>
-                  </Button>
+                  </HBox>
+                  <VBox>
+                  <VBox alignment="TOP_CENTER" layoutY="178.0" prefHeight="579.0" prefWidth="300.0">
+                     <children>
+                        <Label text="Name Here" />
+                         <Label text="Life Line">
+                           <padding>
+                              <Insets bottom="50.0" />
+                           </padding></Label>
+                     </children>
+                  </VBox>
+                   <VBox prefHeight="579.0" prefWidth="300.0">
+                      <Label alignment="TOP_LEFT" text="Label" />
+                      <TextArea prefHeight="491.0" prefWidth="300.0" />
+                   </VBox>
+                  </VBox>
                </children>
             </AnchorPane>
           <AnchorPane id="canvasPane" minHeight="0.0" minWidth="0.0" prefHeight="160.0" prefWidth="100.0" style="-fx-background-color: white;">
                <children>
-                  <Canvas id="baseCanvas" height="758.0" layoutY="1.0" width="1027.0" AnchorPane.topAnchor="0.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0"/>
+                  <Canvas id="baseCanvas" height="758.0" layoutY="1.0" width="1027.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0" />
                   <ZoomableScrollPane id="zoomPane" fitToHeight="true" fitToWidth="true" layoutY="1.0" AnchorPane.topAnchor="0.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0"/>
-                  <TextField id="searchBox"  layoutY="14.0" prefHeight="30.0" prefWidth="208.0" promptText="Search" AnchorPane.rightAnchor="30.0">
+                  <TextField id="searchBox" layoutY="14.0" prefHeight="30.0" prefWidth="208.0" promptText="Search" AnchorPane.rightAnchor="30.0">
                      <font>
                         <Font name="System Italic" size="13.0" />
                      </font>
