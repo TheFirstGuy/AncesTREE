@@ -1,7 +1,7 @@
 package datatree;
 
 import java.util.ArrayList;
-import java.util.Calendar;
+import java.time.LocalDate;
 import java.util.Date;
 
 /**
@@ -25,8 +25,8 @@ public class PersonImpl implements Person{
     private String lastName_;
 
     // Dates
-    private Calendar birthDate_;
-    private Calendar deathDate_;
+    private LocalDate birthDate_;
+    private LocalDate deathDate_;
     private boolean alive_;
 
     // Generation
@@ -40,7 +40,7 @@ public class PersonImpl implements Person{
     // Basic constructor, other fields must be set with methods
     public PersonImpl(String firstName,
                       String lastName,
-                      Calendar birthDate,
+                      LocalDate birthDate,
                       SEX sex,
                       boolean alive){
         firstName_ = firstName;
@@ -56,7 +56,7 @@ public class PersonImpl implements Person{
                       String middleNames,
                       String lastName,
                       SEX sex,
-                      Calendar birthDate,
+                      LocalDate birthDate,
                       boolean alive){
         firstName_ = firstName;
         this.middleNames_ = PersonImpl.parseMiddleNames(middleNames);
@@ -69,8 +69,8 @@ public class PersonImpl implements Person{
     public PersonImpl(String firstName,
                       String lastName,
                       SEX sex,
-                      Calendar birthDate,
-                      Calendar deathDate,
+                      LocalDate birthDate,
+                      LocalDate deathDate,
                       boolean alive){
         firstName_ = firstName;
         this.lastName_ = lastName;
@@ -184,7 +184,7 @@ public class PersonImpl implements Person{
         // Check that child is not already set
         if (child != null){
             if (!children.contains(child) &&
-                    child.getBirthDate().after(this.getBirthDate())) {
+                    child.getBirthDate().isAfter(this.getBirthDate())) {
                 children.add(child);
 
                 // Set as parent
@@ -241,28 +241,28 @@ public class PersonImpl implements Person{
     }
 
     @Override
-    public Calendar getBirthDate() {
+    public LocalDate getBirthDate() {
         return birthDate_;
     }
 
     @Override
-    public void setBirthDate(Calendar birthDate) {
+    public void setBirthDate(LocalDate birthDate) {
         // Check birth is not before death
-        if(this.deathDate_ != null && this.deathDate_.before(birthDate)){
+        if(this.deathDate_ != null && this.deathDate_.isBefore(birthDate)){
             return;
         }
             // Check birth is not before father's birth
-        else if(this.father != null && this.father.getBirthDate().after(birthDate)){
+        else if(this.father != null && this.father.getBirthDate().isAfter(birthDate)){
             return;
         }
         // Check birth is not before mother's birth
-        else if(this.mother != null && this.mother.getBirthDate().after(birthDate)){
+        else if(this.mother != null && this.mother.getBirthDate().isAfter(birthDate)){
             return;
         }
         // Check birth is not after children's birth
         else{
             for(Person child : this.children){
-                if(child.getBirthDate().before(birthDate)){
+                if(child.getBirthDate().isBefore(birthDate)){
                     return;
                 }
             }
@@ -272,13 +272,13 @@ public class PersonImpl implements Person{
     }
 
     @Override
-    public Calendar getDeathDate() {
+    public LocalDate getDeathDate() {
         return deathDate_;
     }
 
     @Override
-    public void setDeathDate(Calendar deathDate) {
-        if(this.birthDate_.before(deathDate)){
+    public void setDeathDate(LocalDate deathDate) {
+        if(this.birthDate_.isBefore(deathDate)){
             this.deathDate_ = deathDate;
         }
     }
@@ -351,7 +351,7 @@ public class PersonImpl implements Person{
         else if(parent.getSex() != expectedSex){
             isValid = false;
         }
-        else if(parent.getBirthDate().after(this.birthDate_)){
+        else if(parent.getBirthDate().isAfter(this.birthDate_)){
             isValid = false;
         }
         else if(expectedSex == SEX.FEMALE && this.father != null && this.father.equals(parent)){

@@ -1,6 +1,6 @@
 package datatree;
 
-import java.util.Calendar;
+import java.time.LocalDate;
 
 /**
  * Created by Urs on 3/25/2017.
@@ -47,13 +47,13 @@ public interface Person {
 
     public void setLastName(String lastName);
 
-    public Calendar getBirthDate();
+    public LocalDate getBirthDate();
 
-    public void setBirthDate(Calendar birthDate);
+    public void setBirthDate(LocalDate birthDate);
 
-    public Calendar getDeathDate();
+    public LocalDate getDeathDate();
 
-    public void setDeathDate(Calendar deathDate);
+    public void setDeathDate(LocalDate deathDate);
 
     public String getDescription();
 

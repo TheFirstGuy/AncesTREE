@@ -10,7 +10,7 @@ import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
 
 import java.io.IOException;
-import java.util.GregorianCalendar;
+import java.time.LocalDate;
 
 
 public class Main extends Application {
@@ -48,13 +48,13 @@ public class Main extends Application {
 
 
             // Create person for card
-            PersonImpl eddard = new PersonImpl("Eddard", "Stark", PersonImpl.SEX.MALE ,new GregorianCalendar(1637, 1, 12), new GregorianCalendar(-1601, 6, 31), false);
-            PersonImpl catelyn = new PersonImpl("Catelyn", "Tully", PersonImpl.SEX.FEMALE, new GregorianCalendar(1636, 4, 24), new GregorianCalendar(-1601, 8, 23), false);
-            PersonImpl robb = new PersonImpl("Robb", "Stark", PersonImpl.SEX.MALE, new GregorianCalendar(1678, 2, 10), new GregorianCalendar(-1601, 3, 10), false);
-            PersonImpl sansa = new PersonImpl("Sansa", "Stark", PersonImpl.SEX.FEMALE, new GregorianCalendar(16779, 3, 12), null, true);
-            PersonImpl arya = new PersonImpl("Arya", "Stark", PersonImpl.SEX.FEMALE, new GregorianCalendar(1680, 3, 12), null, true);
-            PersonImpl bran = new PersonImpl("Bran", "Stark", PersonImpl.SEX.MALE, new GregorianCalendar(1682, 5, 2), null, true);
-            PersonImpl rickon = new PersonImpl("Rickon", "Stark", PersonImpl.SEX.MALE, new GregorianCalendar(1684, 7, 23), null, true);
+            PersonImpl eddard = new PersonImpl("Eddard", "Stark", PersonImpl.SEX.MALE , LocalDate.of(1637, 1, 12), LocalDate.of(1686, 6, 21), false);
+            PersonImpl catelyn = new PersonImpl("Catelyn", "Tully", PersonImpl.SEX.FEMALE, LocalDate.of(1636, 4, 24), LocalDate.of(1678, 8, 23), false);
+            PersonImpl robb = new PersonImpl("Robb", "Stark", PersonImpl.SEX.MALE, LocalDate.of(1678, 2, 10), LocalDate.of(1690, 3, 10), false);
+            PersonImpl sansa = new PersonImpl("Sansa", "Stark", PersonImpl.SEX.FEMALE, LocalDate.of(16779, 3, 12), null, true);
+            PersonImpl arya = new PersonImpl("Arya", "Stark", PersonImpl.SEX.FEMALE, LocalDate.of(1680, 3, 12), null, true);
+            PersonImpl bran = new PersonImpl("Bran", "Stark", PersonImpl.SEX.MALE, LocalDate.of(1682, 5, 2), null, true);
+            PersonImpl rickon = new PersonImpl("Rickon", "Stark", PersonImpl.SEX.MALE, LocalDate.of(1684, 7, 23), null, true);
             robb.setFather(eddard);
             sansa.setFather(eddard);
             arya.setFather(eddard);

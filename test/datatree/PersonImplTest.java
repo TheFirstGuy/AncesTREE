@@ -5,9 +5,7 @@ import org.junit.Before;
 import org.junit.Ignore;
 import org.junit.Test;
 
-import java.util.Calendar;
-import java.util.Date;
-import java.util.GregorianCalendar;
+import java.time.LocalDate;
 
 import static org.junit.Assert.*;
 
@@ -21,16 +19,16 @@ public class PersonImplTest {
     @Before
     public void setUp() throws Exception {
         this.female = new PersonImpl("Jane", "Smith",
-                new GregorianCalendar(2000, 1, 1), PersonImpl.SEX.FEMALE, true);
+                LocalDate.of(2000, 1, 1), PersonImpl.SEX.FEMALE, true);
         this.male= new PersonImpl("John", "Smith",
-                new GregorianCalendar(2000,2,3), Person.SEX.MALE, true);
+                LocalDate.of(2000, 2, 3), Person.SEX.MALE, true);
     }
 
     @Test
     public void tesEqualsNominal(){
         PersonImpl targetFemale = this.female;
         PersonImpl targetMale = this.male;
-        PersonImpl sameNameFemale = new PersonImpl("Jane", "Smith", new GregorianCalendar(1,2,3), Person.SEX.FEMALE, true);
+        PersonImpl sameNameFemale = new PersonImpl("Jane", "Smith", LocalDate.of(1, 2, 3), Person.SEX.FEMALE, true);
 
         assertTrue(targetFemale.equals(this.female));
         assertTrue(this.female.equals(targetFemale));
@@ -50,7 +48,7 @@ public class PersonImplTest {
     @Test
     public void testSetFatherNominal(){
         Person targetFather = new PersonImpl("Dad", "Smith",
-                new GregorianCalendar(1900,2,3), Person.SEX.MALE, true);
+                LocalDate.of(1900, 2, 3), Person.SEX.MALE, true);
 
         this.female.setFather(targetFather);
         assertEquals(targetFather, this.female.getFather());
@@ -61,7 +59,7 @@ public class PersonImplTest {
     public void testSetYoungFather(){
 
         Person youngFather = new PersonImpl("Dad", "Smith",
-                new GregorianCalendar(2010,3,1), Person.SEX.MALE, true);
+                LocalDate.of(2010, 3, 1), Person.SEX.MALE, true);
 
         this.female.setFather(youngFather);
         assertNotEquals(this.female.getFather(), youngFather);
@@ -70,7 +68,7 @@ public class PersonImplTest {
     @Test
     public void testSetDeadFather(){
         Person deadFather = new PersonImpl("Dad", "Smith",
-                new GregorianCalendar(1970,2,3), Person.SEX.MALE, false);
+                LocalDate.of(1970, 2, 3), Person.SEX.MALE, false);
         this.female.setFather(deadFather);
         assertEquals(this.female.getFather(), deadFather);
     }
@@ -78,7 +76,7 @@ public class PersonImplTest {
     @Test
     public void testSetFemaleFather(){
         Person femaleFather = new PersonImpl("Dad", "Smith",
-                new GregorianCalendar( 1960,2,3), Person.SEX.FEMALE, true);
+                LocalDate.of(1960, 2, 3), Person.SEX.FEMALE, true);
         this.female.setFather(femaleFather);
         assertNotEquals(this.female.getFather(), femaleFather);
     }
@@ -86,7 +84,7 @@ public class PersonImplTest {
     @Test
     public void testSetMotherNominal(){
         Person targetMother = new PersonImpl("Mom", "Smith",
-                new GregorianCalendar(1900,2,3), Person.SEX.FEMALE, true);
+                LocalDate.of(1900, 2, 3), Person.SEX.FEMALE, true);
         this.female.setMother(targetMother);
         assertEquals(this.female.getMother(), targetMother);
     }
@@ -94,7 +92,7 @@ public class PersonImplTest {
     @Test
     public void testSetMaleMother(){
         Person maleMother = new PersonImpl("Mom", "Smith",
-                new GregorianCalendar( 1960,2,3), Person.SEX.MALE, true);
+                LocalDate.of(1960, 2, 3), Person.SEX.MALE, true);
         this.female.setMother(maleMother);
         assertNotEquals(this.female.getMother(), maleMother);
     }
@@ -102,7 +100,7 @@ public class PersonImplTest {
     @Test
     public void testSetYoungerMother(){
         Person youngerMother = new PersonImpl("Mom", "Smith",
-                new GregorianCalendar( 2010,2,3), Person.SEX.FEMALE, true);
+                LocalDate.of(2010, 2, 3), Person.SEX.FEMALE, true);
         this.female.setMother(youngerMother);
         assertNotEquals(this.female.getMother(), youngerMother);
     }
@@ -110,7 +108,7 @@ public class PersonImplTest {
     @Test
     public void testDeadMother(){
         Person deadMother = new PersonImpl("Mom", "Smith",
-                new GregorianCalendar( 1960,2,3), Person.SEX.FEMALE, false);
+                LocalDate.of(1960, 2, 3), Person.SEX.FEMALE, false);
         this.female.setMother(deadMother);
         assertEquals(this.female.getMother(), deadMother);
     }
@@ -118,9 +116,9 @@ public class PersonImplTest {
     @Test
     public void testAddChildNominal(){
         Person femaleChild = new PersonImpl("Child", "Smith",
-                new GregorianCalendar(2010, 2, 3), Person.SEX.FEMALE, true);
+                LocalDate.of(2010, 2, 3), Person.SEX.FEMALE, true);
         Person maleChild = new PersonImpl("Child", "Smith",
-                new GregorianCalendar(2011, 2,3), Person.SEX.MALE, false);
+                LocalDate.of(2011, 2, 3), Person.SEX.MALE, false);
 
 
         this.female.addChild(femaleChild);
@@ -141,7 +139,7 @@ public class PersonImplTest {
     @Test
     public void testAddOlderChild(){
         Person olderChild = new PersonImpl("Child","Smith",
-                new GregorianCalendar(1920,2,1), Person.SEX.FEMALE, true);
+                LocalDate.of(1920, 2, 1), Person.SEX.FEMALE, true);
 
         this.female.addChild(olderChild);
         assertEquals(this.female.getChildren().length, 0);
@@ -158,7 +156,7 @@ public class PersonImplTest {
     @Test
     public void testAddingSameChild(){
         Person child = new PersonImpl("Child", "Smith",
-                new GregorianCalendar(2010, 2, 3), Person.SEX.FEMALE, true);
+                LocalDate.of(2010, 2, 3), Person.SEX.FEMALE, true);
         this.female.addChild(child);
         this.female.addChild(child);
         assertEquals(this.female.getChildren().length, 1);
@@ -167,9 +165,9 @@ public class PersonImplTest {
     @Test
     public void testRemoveChild(){
         Person femaleChild = new PersonImpl("Child", "Smith",
-                new GregorianCalendar(2010, 2, 3), Person.SEX.FEMALE, true);
+                LocalDate.of(2010, 2, 3), Person.SEX.FEMALE, true);
         Person maleChild = new PersonImpl("Child", "Smith",
-                new GregorianCalendar(2011, 2,3), Person.SEX.MALE, false);
+                LocalDate.of(2011, 2, 3), Person.SEX.MALE, false);
 
         this.female.addChild(femaleChild);
         this.female.addChild(maleChild);
@@ -183,7 +181,7 @@ public class PersonImplTest {
     @Test
     public void testRemoveNullChild(){
         Person child = new PersonImpl("Child", "Smith",
-                new GregorianCalendar(2010, 2, 3), Person.SEX.FEMALE, true);
+                LocalDate.of(2010, 2, 3), Person.SEX.FEMALE, true);
 
         this.female.addChild(child);
         this.female.removeChild(null);
@@ -195,7 +193,7 @@ public class PersonImplTest {
     @Test
     public void testRemoveFather(){
         Person targetFather = new PersonImpl("Dad", "Smith",
-                new GregorianCalendar(1900,2,3), Person.SEX.MALE, true);
+                LocalDate.of(1900, 2, 3), Person.SEX.MALE, true);
 
         this.female.setFather(targetFather);
         this.female.removeFather();
@@ -207,7 +205,7 @@ public class PersonImplTest {
     @Test
     public void testRemoveMother(){
         Person targetMother = new PersonImpl("Mom", "Smith",
-                new GregorianCalendar(1900,2,3), Person.SEX.FEMALE, true);
+                LocalDate.of(1900, 2, 3), Person.SEX.FEMALE, true);
 
         this.female.setMother(targetMother);
         this.female.removeMother();
@@ -218,7 +216,7 @@ public class PersonImplTest {
 
     @Test
     public void testSetBirthdateNominal(){
-        GregorianCalendar nominalBirthday = new GregorianCalendar(1950, 1,1);
+        LocalDate nominalBirthday = LocalDate.of(1950, 1, 1);
 
         this.female.setBirthDate(nominalBirthday);
 
@@ -227,9 +225,9 @@ public class PersonImplTest {
 
     @Test
     public void testSetBirthAfterDeath(){
-        GregorianCalendar bornAfterDeath = new GregorianCalendar(2050,3,2);
-        GregorianCalendar death = new GregorianCalendar(2000, 3,4);
-        GregorianCalendar currentBirthDate = (GregorianCalendar)this.female.getBirthDate();
+        LocalDate bornAfterDeath = LocalDate.of(2050, 3, 2);
+        LocalDate death = LocalDate.of(2000, 3, 4);
+        LocalDate currentBirthDate = (LocalDate)this.female.getBirthDate();
 
         this.female.setDeathDate(death);
         this.female.setBirthDate(bornAfterDeath);
@@ -241,11 +239,11 @@ public class PersonImplTest {
     @Test
     public void testSetBirthBeforeParents(){
         Person targetMother = new PersonImpl("Mom", "Smith",
-                new GregorianCalendar(1900,2,3), Person.SEX.FEMALE, true);
+                LocalDate.of(1900, 2, 3), Person.SEX.FEMALE, true);
         Person targetFather = new PersonImpl("Dad", "Smith",
-                new GregorianCalendar(1900,2,3), Person.SEX.MALE, true);
-        GregorianCalendar birthDate = new GregorianCalendar(1850,3,4);
-        GregorianCalendar currentBirthDate = (GregorianCalendar)this.female.getBirthDate();
+                LocalDate.of(1900, 2, 3), Person.SEX.MALE, true);
+        LocalDate birthDate = LocalDate.of(1850, 3, 4);
+        LocalDate currentBirthDate = (LocalDate)this.female.getBirthDate();
 
         this.female.setMother(targetMother);
         this.female.setFather(targetFather);
@@ -258,10 +256,10 @@ public class PersonImplTest {
     @Test
     public void testSetBirthAfterChildren(){
         Person femaleChild = new PersonImpl("Child", "Smith",
-                new GregorianCalendar(2010, 2, 3), Person.SEX.FEMALE, true);
+                LocalDate.of(2010, 2, 3), Person.SEX.FEMALE, true);
         Person maleChild = new PersonImpl("Child", "Smith",
-                new GregorianCalendar(2011, 2,3), Person.SEX.MALE, false);
-        GregorianCalendar birthDate = new GregorianCalendar(2050,3,2);
+                LocalDate.of(2011, 2, 3), Person.SEX.MALE, false);
+        LocalDate birthDate = LocalDate.of(2050, 3, 2);
 
         this.female.addChild(femaleChild);
         this.female.addChild(maleChild);
@@ -273,7 +271,7 @@ public class PersonImplTest {
 
     @Test
     public void testSetDeathDateNominal(){
-        GregorianCalendar deathDate = new GregorianCalendar(2015,6,2);
+        LocalDate deathDate = LocalDate.of(2015, 6, 2);
 
         this.female.setDeathDate(deathDate);
 
@@ -282,7 +280,7 @@ public class PersonImplTest {
 
     @Test
     public void testSetDeathBeforeBirth(){
-        GregorianCalendar deathBeforeBirth = new GregorianCalendar(1830,6,3);
+        LocalDate deathBeforeBirth = LocalDate.of(1830, 6, 3);
 
         this.female.setDeathDate(deathBeforeBirth);
 

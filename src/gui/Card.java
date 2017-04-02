@@ -17,6 +17,8 @@ import javafx.scene.text.Font;
 import java.io.File;
 import java.io.IOException;
 import java.text.SimpleDateFormat;
+import java.time.format.DateTimeFormatter;
+import java.time.format.FormatStyle;
 
 /**
  * Created by TheFirstGuy on 1/5/2017.
@@ -109,7 +111,7 @@ public class Card extends Pane {
             lifeSpan_ = "?";
         }
         else{
-            lifeSpan_ = simpleDateFormat.format(person_.getBirthDate().getTime());
+            lifeSpan_ = person_.getBirthDate().format(DateTimeFormatter.ofLocalizedDate(FormatStyle.MEDIUM));
         }
         // Check if death date is known
         if(!person_.isAlive()){
@@ -117,7 +119,7 @@ public class Card extends Pane {
                 lifeSpan_ += " - ?";
             }
             else{
-                lifeSpan_ += " - " + simpleDateFormat.format(person_.getDeathDate().getTime());
+                lifeSpan_ += " - " + person_.getDeathDate().format(DateTimeFormatter.ofLocalizedDate(FormatStyle.MEDIUM));
             }
         }
     }
