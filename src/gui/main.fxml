@@ -79,21 +79,24 @@
                          </Button>
                      </children>
                   </HBox>
-                  <VBox>
                   <VBox alignment="TOP_CENTER" layoutY="178.0" prefHeight="579.0" prefWidth="300.0">
                      <children>
                         <Label text="Name Here" />
                          <Label text="Life Line">
                            <padding>
                               <Insets bottom="50.0" />
-                           </padding></Label>
+                           </padding>
+                         </Label>
                      </children>
                   </VBox>
-                   <VBox prefHeight="579.0" prefWidth="300.0">
-                      <Label alignment="TOP_LEFT" text="Label" />
-                      <TextArea prefHeight="491.0" prefWidth="300.0" />
-                   </VBox>
-                  </VBox>
+                   <AnchorPane layoutY="250">
+                      <children>
+                       <VBox prefHeight="579.0" prefWidth="300.0">
+                          <Label alignment="TOP_LEFT" text="Description" />
+                          <TextArea prefHeight="491.0" prefWidth="300.0" />
+                       </VBox>
+                      </children>
+                  </AnchorPane>
                </children>
             </AnchorPane>
           <AnchorPane id="canvasPane" minHeight="0.0" minWidth="0.0" prefHeight="160.0" prefWidth="100.0" style="-fx-background-color: white;">
